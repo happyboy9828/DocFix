@@ -1,0 +1,6 @@
+{
+  "name": "DocFix - Government Job Document & Photo Resizer (300KB)",
+  "description": "All-in-one document and photo resizer for FPSC, PPSC, NTS, NJP, and admissions. Auto-converts to JPG, exact dimensions, target KB compression, 200 DPI, and CNIC front+back PDF merger.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
