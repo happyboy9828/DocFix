@@ -13,6 +13,7 @@ import { Footer } from './components/Footer';
 import { FeedbackModal } from './components/FeedbackModal';
 import { CookieBanner } from './components/CookieBanner';
 import { AdSlot } from './components/ads/AdSlot';
+import { PremiumModal } from './components/PremiumModal';
 
 import { PrivacyPolicy } from './components/legal/PrivacyPolicy';
 import { TermsOfService } from './components/legal/TermsOfService';
@@ -22,6 +23,11 @@ import { ContactUs } from './components/legal/ContactUs';
 
 import { PORTAL_PRESETS } from '../server/data/portals';
 import { PortalPreset } from './types/document';
+import {
+  getUsageState,
+  recordConversion,
+  UsageState
+} from './utils/limitEngine';
 import {
   CheckCircle2,
   TrendingUp,
@@ -37,6 +43,8 @@ export default function App() {
   const [selectedPortalId, setSelectedPortalId] = useState<string>('fpsc');
   const [isCustom, setIsCustom] = useState<boolean>(false);
   const [feedbackModalOpen, setFeedbackModalOpen] = useState<boolean>(false);
+  const [premiumModalOpen, setPremiumModalOpen] = useState<boolean>(false);
+  const [usage, setUsage] = useState<UsageState>(getUsageState());
 
   // Stats from backend
   const [stats, setStats] = useState({
@@ -110,6 +118,25 @@ export default function App() {
     handleTabChange('resizer');
   };
 
+  // Daily conversion limit tracking: returns false if limit reached
+  const handleConversionPerformed = (): boolean => {
+    const state = getUsageState();
+    if (!state.isPremium && state.count >= state.maxDaily) {
+      return false;
+    }
+    const newUsage = recordConversion();
+    setUsage(newUsage);
+    return true;
+  };
+
+  const handleOpenPremium = () => {
+    setPremiumModalOpen(true);
+  };
+
+  const handlePremiumStatusChange = () => {
+    setUsage(getUsageState());
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-['Plus_Jakarta_Sans',sans-serif]">
       {/* Top Navbar */}
@@ -117,6 +144,8 @@ export default function App() {
         activeTab={activeTab}
         setActiveTab={handleTabChange}
         onOpenFeedback={() => setFeedbackModalOpen(true)}
+        usage={usage}
+        onOpenPremium={handleOpenPremium}
       />
 
       {/* Breadcrumb Navigation Bar (Required for AdSense UX & SEO Crawlability) */}
@@ -251,6 +280,9 @@ export default function App() {
             <SingleDocResizer
               currentPortal={isCustom ? null : currentPortal}
               isCustom={isCustom}
+              usage={usage}
+              onConversionPerformed={handleConversionPerformed}
+              onOpenPremium={handleOpenPremium}
             />
 
             {/* Mid-Content Ad Container */}
@@ -265,7 +297,11 @@ export default function App() {
         {/* Tab 2: CNIC Front + Back Combiner */}
         {activeTab === 'cnic' && (
           <div className="space-y-6">
-            <CnicCombiner />
+            <CnicCombiner
+              usage={usage}
+              onConversionPerformed={handleConversionPerformed}
+              onOpenPremium={handleOpenPremium}
+            />
             <AdSlot format="banner" />
             <WhyDocFix />
           </div>
@@ -277,6 +313,9 @@ export default function App() {
             <JobBundlePack
               portals={portals}
               selectedPortalId={selectedPortalId}
+              usage={usage}
+              onConversionPerformed={handleConversionPerformed}
+              onOpenPremium={handleOpenPremium}
             />
             <AdSlot format="banner" />
             <WhyDocFix />
@@ -342,6 +381,14 @@ export default function App() {
       <FeedbackModal
         isOpen={feedbackModalOpen}
         onClose={() => setFeedbackModalOpen(false)}
+      />
+
+      {/* Premium Upgrade Modal */}
+      <PremiumModal
+        isOpen={premiumModalOpen}
+        onClose={() => setPremiumModalOpen(false)}
+        isPremium={usage.isPremium}
+        onStatusChange={handlePremiumStatusChange}
       />
 
       {/* Cookie & Advertising Consent Notice (Mandatory for AdSense / Monetag) */}

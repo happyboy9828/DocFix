@@ -24,7 +24,7 @@ export const PrivacyPolicy: React.FC = () => {
           <span>Zero Server Upload Guarantee for Documents &amp; Photos</span>
         </div>
         <p>
-          At DocFix (accessible from <code className="font-mono bg-white px-1 py-0.5 rounded border border-emerald-200">https://docfix.pk</code>), the privacy of our visitors is of paramount importance. <strong>Your uploaded photographs, National Identity Cards (CNIC), signatures, and academic certificates are NEVER transferred to, processed on, or stored on our servers.</strong> All conversions, dimensions resizing, DPI injection, and PDF compiling happen entirely inside your local web browser using client-side HTML5 Canvas and WebAssembly.
+          At DocFix (accessible from <code className="font-mono bg-white px-1 py-0.5 rounded border border-emerald-200">http://0.0.0.0:3000</code>), the privacy of our visitors is of paramount importance. <strong>Your uploaded photographs, National Identity Cards (CNIC), signatures, and academic certificates are NEVER transferred to, processed on, or stored on our servers.</strong> All conversions, dimensions resizing, DPI injection, and PDF compiling happen entirely inside your local web browser using client-side HTML5 Canvas and WebAssembly.
         </p>
       </div>
 

@@ -28,7 +28,7 @@ export const TermsOfService: React.FC = () => {
       <section className="space-y-3">
         <h2 className="text-lg font-bold text-slate-900">1. Acceptance of Terms</h2>
         <p>
-          By accessing or using DocFix (<code className="font-mono bg-slate-100 px-1 py-0.5 rounded">https://docfix.pk</code>), you agree to be bound by these Terms of Service. If you do not agree to these terms, you must discontinue the use of this website immediately.
+          By accessing or using DocFix (<code className="font-mono bg-slate-100 px-1 py-0.5 rounded">http://0.0.0.0:3000</code>), you agree to be bound by these Terms of Service. If you do not agree to these terms, you must discontinue the use of this website immediately.
         </p>
       </section>
 

@@ -22,7 +22,7 @@ export const Disclaimer: React.FC = () => {
           No Affiliation with Government Agencies or Testing Bodies
         </h2>
         <p>
-          DocFix (<code className="font-mono bg-white px-1 py-0.5 rounded border border-slate-200">https://docfix.pk</code>) is an independently operated web-based image compression and formatting utility.
+          DocFix (<code className="font-mono bg-white px-1 py-0.5 rounded border border-slate-200">http://0.0.0.0:3000</code>) is an independently operated web-based image compression and formatting utility.
         </p>
         <p>
           DocFix is <strong>NOT</strong> associated, affiliated, endorsed, authorized, or in any way officially connected with:

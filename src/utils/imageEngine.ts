@@ -214,7 +214,9 @@ async function binarySearchCompress(
     if (currentBytes <= targetMaxBytes) {
       // Good candidate, save it and try higher quality
       bestBuffer = uint8;
-      bestBlob = new Blob([uint8.buffer as ArrayBuffer], { type: format });
+      // Defensive copy: ensure underlying buffer is a plain ArrayBuffer,
+      // not a SharedArrayBuffer, for maximum Blob compatibility.
+      bestBlob = new Blob([new Uint8Array(uint8)], { type: format });
       lowQuality = midQuality;
     } else {
       // Too large, decrease quality
@@ -233,7 +235,7 @@ async function binarySearchCompress(
       uint8 = setJpegDpi(uint8, targetDpi);
     }
     bestBuffer = uint8;
-    bestBlob = new Blob([uint8.buffer as ArrayBuffer], { type: format });
+    bestBlob = new Blob([new Uint8Array(uint8)], { type: format });
   }
 
   return { blob: bestBlob, buffer: bestBuffer };

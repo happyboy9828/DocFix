@@ -33,7 +33,7 @@ google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
 
   app.get('/robots.txt', (req, res) => {
     res.type('text/plain');
-    const baseUrl = process.env.APP_URL || 'https://docfix.pk';
+    const baseUrl = process.env.APP_URL || 'http://0.0.0.0:3000';
     res.send(`User-agent: *
 Allow: /
 Disallow: /api/
@@ -50,7 +50,7 @@ Sitemap: ${baseUrl}/sitemap.xml
 
   app.get('/sitemap.xml', (req, res) => {
     res.type('application/xml');
-    const baseUrl = process.env.APP_URL || 'https://docfix.pk';
+    const baseUrl = process.env.APP_URL || 'http://0.0.0.0:3000';
     const now = new Date().toISOString().split('T')[0];
     res.send(`<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -139,7 +139,7 @@ Sitemap: ${baseUrl}/sitemap.xml
   }
 
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`DocFix server running at http://0.0.0.0:${PORT}`);
+    console.log(`DocFix server running at http://localhost:${PORT}`);
   });
 }
 

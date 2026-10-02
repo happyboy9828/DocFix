@@ -206,7 +206,7 @@ export async function combineCnicImages(
 
     if (withDpi.byteLength <= safeTargetBytes) {
       bestBuffer = withDpi;
-      bestBlob = new Blob([withDpi.buffer as ArrayBuffer], { type: 'image/jpeg' });
+      bestBlob = new Blob([new Uint8Array(withDpi)], { type: 'image/jpeg' });
       lowQuality = q;
     } else {
       highQuality = q;
@@ -216,7 +216,7 @@ export async function combineCnicImages(
   if (!bestBlob || !bestBuffer) {
     const rawBlob = await new Promise<Blob>((resolve) => canvas.toBlob((b) => resolve(b!), 'image/jpeg', lowQuality));
     const withDpi = setJpegDpi(new Uint8Array(await rawBlob.arrayBuffer()), options.dpi);
-    bestBlob = new Blob([withDpi.buffer as ArrayBuffer], { type: 'image/jpeg' });
+    bestBlob = new Blob([new Uint8Array(withDpi)], { type: 'image/jpeg' });
   }
 
   const fileSizeBytes = bestBlob.size;
