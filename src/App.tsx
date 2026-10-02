@@ -10,7 +10,6 @@ import { GuidelinesSection } from './components/GuidelinesSection';
 import { FaqSection } from './components/FaqSection';
 import { WhyDocFix } from './components/WhyDocFix';
 import { Footer } from './components/Footer';
-import { FeedbackModal } from './components/FeedbackModal';
 import { CookieBanner } from './components/CookieBanner';
 import { AdSlot } from './components/ads/AdSlot';
 import { PremiumModal } from './components/PremiumModal';
@@ -28,6 +27,7 @@ import {
   recordConversion,
   UsageState
 } from './utils/limitEngine';
+import { useTheme } from './utils/useTheme';
 import {
   CheckCircle2,
   TrendingUp,
@@ -42,9 +42,11 @@ export default function App() {
   const [portals, setPortals] = useState<PortalPreset[]>(PORTAL_PRESETS);
   const [selectedPortalId, setSelectedPortalId] = useState<string>('fpsc');
   const [isCustom, setIsCustom] = useState<boolean>(false);
-  const [feedbackModalOpen, setFeedbackModalOpen] = useState<boolean>(false);
   const [premiumModalOpen, setPremiumModalOpen] = useState<boolean>(false);
   const [usage, setUsage] = useState<UsageState>(getUsageState());
+
+  // Appearance: light / dark / system, persisted to localStorage
+  const theme = useTheme();
 
   // Stats from backend
   const [stats, setStats] = useState({
@@ -138,22 +140,23 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col font-['Plus_Jakarta_Sans',sans-serif]">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col font-['Plus_Jakarta_Sans',sans-serif]">
       {/* Top Navbar */}
       <Navbar
         activeTab={activeTab}
         setActiveTab={handleTabChange}
-        onOpenFeedback={() => setFeedbackModalOpen(true)}
         usage={usage}
         onOpenPremium={handleOpenPremium}
+        themePreference={theme.preference}
+        onCycleTheme={theme.cycle}
       />
 
       {/* Breadcrumb Navigation Bar (Required for AdSense UX & SEO Crawlability) */}
-      <div className="bg-white border-b border-slate-200 py-2">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-xs text-slate-500 flex items-center gap-1.5 overflow-x-auto whitespace-nowrap">
-          <button onClick={() => handleTabChange('resizer')} className="hover:text-emerald-700">Home</button>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-300" />
-          <span className="font-semibold text-slate-800 capitalize">
+      <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 py-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 overflow-x-auto whitespace-nowrap">
+          <button onClick={() => handleTabChange('resizer')} className="hover:text-emerald-700 dark:hover:text-emerald-300">Home</button>
+          <ChevronRight className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600" />
+          <span className="font-semibold text-slate-800 dark:text-slate-200 capitalize">
             {activeTab === 'resizer' && 'Document Resizer (300KB)'}
             {activeTab === 'cnic' && 'CNIC Front + Back Single Page Combiner'}
             {activeTab === 'bundle' && '1-Click Job Application Bundle Kit'}
@@ -178,24 +181,24 @@ export default function App() {
         {/* HERO SECTION (Rendered on main tools tabs) */}
         {['resizer', 'cnic', 'bundle', 'diagnostic'].includes(activeTab) && (
           <section className="text-center max-w-3xl mx-auto space-y-4 pt-1">
-            <div className="flex items-center justify-center gap-2 text-xs font-semibold text-slate-500">
-              <span className="text-emerald-700 font-bold">DocFix v2.4</span>
-              <span aria-hidden="true">·</span>
+            <div className="flex items-center justify-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
+              <span className="text-emerald-700 dark:text-emerald-300 font-bold">DocFix v2.4</span>
+              <span aria-hidden="true">Â·</span>
               <span>Government Job Document Resizer</span>
-              <span aria-hidden="true">·</span>
+              <span aria-hidden="true">Â·</span>
               <span>Zero Form Rejection Guarantee</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
-              Resize to Exact <span className="text-emerald-600 underline decoration-emerald-300 decoration-wavy decoration-2">300KB</span> &amp; 150×150px in Seconds
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight leading-[1.15]">
+              Resize to Exact <span className="text-emerald-600 underline decoration-emerald-300 decoration-wavy decoration-2">300KB</span> &amp; 150Ã—150px in Seconds
             </h1>
 
-            <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
               Every FPSC, PPSC, NTS, and university admission form rejects photos if not strictly under 300KB or 25KB. DocFix auto-converts to JPG, hits exact dimensions, sets certified 200 DPI, and combines CNIC front+back for instant acceptance.
             </p>
 
             {/* Social Proof & Metrics Bar */}
-            <div className="flex flex-wrap items-center justify-center gap-6 pt-2 text-xs text-slate-600">
+            <div className="flex flex-wrap items-center justify-center gap-6 pt-2 text-xs text-slate-600 dark:text-slate-400">
               <div className="flex items-center gap-1.5 font-medium">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <span><strong>{stats.totalResized.toLocaleString()}+</strong> Documents Resized</span>
@@ -216,14 +219,14 @@ export default function App() {
 
             {/* Quick Tab Switcher */}
             <div className="pt-2 flex justify-center">
-              <div className="inline-flex p-1 bg-slate-200/70 rounded-xl gap-1 text-xs overflow-x-auto">
+              <div className="inline-flex p-1 bg-slate-200/70 dark:bg-slate-800/70 rounded-xl gap-1 text-xs overflow-x-auto">
                 <button
                   type="button"
                   onClick={() => handleTabChange('resizer')}
                   className={`px-3 sm:px-4 py-2 rounded-lg font-semibold transition-all whitespace-nowrap ${
                     activeTab === 'resizer'
-                      ? 'bg-white text-slate-900 shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900'
+                      ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xs'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                   }`}
                 >
                   1. Photo Resizer (300KB)
@@ -233,8 +236,8 @@ export default function App() {
                   onClick={() => handleTabChange('cnic')}
                   className={`px-3 sm:px-4 py-2 rounded-lg font-semibold transition-all whitespace-nowrap ${
                     activeTab === 'cnic'
-                      ? 'bg-white text-slate-900 shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900'
+                      ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xs'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                   }`}
                 >
                   2. CNIC Front+Back
@@ -244,8 +247,8 @@ export default function App() {
                   onClick={() => handleTabChange('bundle')}
                   className={`px-3 sm:px-4 py-2 rounded-lg font-semibold transition-all whitespace-nowrap ${
                     activeTab === 'bundle'
-                      ? 'bg-white text-slate-900 shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900'
+                      ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xs'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                   }`}
                 >
                   3. 1-Click Job Bundle (ZIP)
@@ -255,8 +258,8 @@ export default function App() {
                   onClick={() => handleTabChange('diagnostic')}
                   className={`px-3 sm:px-4 py-2 rounded-lg font-semibold transition-all whitespace-nowrap ${
                     activeTab === 'diagnostic'
-                      ? 'bg-white text-slate-900 shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900'
+                      ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xs'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                   }`}
                 >
                   4. Fix Rejection
@@ -372,16 +375,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <Footer
-        onOpenFeedback={() => setFeedbackModalOpen(true)}
-        onNavigateTab={handleTabChange}
-      />
-
-      {/* Feedback & Portal Request Modal */}
-      <FeedbackModal
-        isOpen={feedbackModalOpen}
-        onClose={() => setFeedbackModalOpen(false)}
-      />
+      <Footer onNavigateTab={handleTabChange} />
 
       {/* Premium Upgrade Modal */}
       <PremiumModal

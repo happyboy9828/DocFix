@@ -6,15 +6,15 @@ export const GuidelinesSection: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
         <div className="flex items-center gap-2">
           <BookOpen className="w-4 h-4 text-emerald-600" />
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Applicant Knowledge Base</span>
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Applicant Knowledge Base</span>
         </div>
-        <h2 className="text-lg font-bold text-slate-900 mt-1">
+        <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 mt-1">
           How to Avoid Photo & Document Rejections in Government Jobs
         </h2>
-        <p className="text-xs text-slate-600 mt-1 max-w-3xl">
+        <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 max-w-3xl">
           Recruitment portals like FPSC, PPSC, NTS, and KPPSC reject over 15% of job applications on the document stage. Here is everything you need to know to ensure 100% acceptance.
         </p>
       </div>
@@ -24,24 +24,24 @@ export const GuidelinesSection: React.FC = () => {
         {DOCUMENT_GUIDELINES.map((item, idx) => (
           <div
             key={idx}
-            className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3"
+            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm space-y-3"
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold font-mono px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200/50">
+              <span className="text-xs font-bold font-mono px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200/50 dark:border-emerald-800/50">
                 {item.tag}
               </span>
-              <span className="text-xs text-slate-400">Rule #{idx + 1}</span>
+              <span className="text-xs text-slate-400 dark:text-slate-500">Rule #{idx + 1}</span>
             </div>
 
-            <h3 className="text-sm font-bold text-slate-900 leading-snug">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 leading-snug">
               {item.title}
             </h3>
 
-            <p className="text-xs font-medium text-slate-700">
+            <p className="text-xs font-medium text-slate-700 dark:text-slate-300">
               {item.summary}
             </p>
 
-            <p className="text-xs text-slate-600 leading-relaxed pt-1 border-t border-slate-100">
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed pt-1 border-t border-slate-100 dark:border-slate-800">
               {item.content}
             </p>
           </div>
@@ -75,7 +75,7 @@ export const GuidelinesSection: React.FC = () => {
               <span>2. Plain Wall Behind</span>
             </div>
             <p className="text-emerald-200/80 leading-normal">
-              Stand against a plain white or light wall. Use DocFix’s "Light Sky Blue" filter to give it the official FPSC studio background look.
+              Stand against a plain white or light wall. Use DocFixâ€™s "Light Sky Blue" filter to give it the official FPSC studio background look.
             </p>
           </div>
 

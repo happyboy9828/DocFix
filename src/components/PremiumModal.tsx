@@ -37,7 +37,7 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({
     const clean = licenseCode.trim().toUpperCase();
     if (clean === 'DOCFIXPRO' || clean === 'PASS2026' || clean === 'PREMIUM' || clean === 'ADMIN') {
       activatePremium(clean);
-      setActivationMsg({ text: '🎉 Premium successfully activated! Unlimited conversions unlocked.', error: false });
+      setActivationMsg({ text: 'ðŸŽ‰ Premium successfully activated! Unlimited conversions unlocked.', error: false });
       onStatusChange();
       setTimeout(() => {
         onClose();
@@ -49,7 +49,7 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({
 
   const handleQuickUnlock = () => {
     activatePremium('DEMO_PRO');
-    setActivationMsg({ text: '🎉 Instant Premium Pass Activated!', error: false });
+    setActivationMsg({ text: 'ðŸŽ‰ Instant Premium Pass Activated!', error: false });
     onStatusChange();
     setTimeout(() => {
       onClose();
@@ -65,13 +65,13 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
-      <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative animate-in fade-in zoom-in-95 duration-150 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 relative animate-in fade-in zoom-in-95 duration-150 overflow-hidden">
         {/* Decorative ambient background */}
         <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-amber-400 via-emerald-500 to-amber-500" />
 
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 text-slate-400 hover:text-slate-700 p-1 rounded-xl transition-colors"
+          className="absolute right-4 top-4 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 p-1 rounded-xl transition-colors"
           aria-label="Close"
         >
           <X className="w-5 h-5" />
@@ -79,17 +79,17 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({
 
         {/* Modal Header */}
         <div className="text-center space-y-2 mb-6">
-          <div className="w-14 h-14 mx-auto rounded-2xl bg-amber-50 border border-amber-200/80 text-amber-600 flex items-center justify-center shadow-xs">
+          <div className="w-14 h-14 mx-auto rounded-2xl bg-amber-50 dark:bg-amber-950 border border-amber-200/80 dark:border-amber-800/80 text-amber-600 flex items-center justify-center shadow-xs">
             <Crown className="w-8 h-8 stroke-[2.2]" />
           </div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-xs font-bold">
-            <Sparkles className="w-3.5 h-3.5 text-amber-700" />
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900 text-amber-900 dark:text-amber-200 text-xs font-bold">
+            <Sparkles className="w-3.5 h-3.5 text-amber-700 dark:text-amber-300" />
             <span>DocFix Pro &amp; Unlimited Access</span>
           </div>
-          <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
             {isPremium ? 'DocFix Premium is Active' : 'Upgrade to DocFix Premium'}
           </h2>
-          <p className="text-xs text-slate-600 max-w-sm mx-auto">
+          <p className="text-xs text-slate-600 dark:text-slate-400 max-w-sm mx-auto">
             {isPremium
               ? 'You have unlimited daily conversions with zero restrictions.'
               : 'Bypass the 3 conversions/day limit and process all your job documents without limits.'}
@@ -103,18 +103,18 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({
               onClick={() => setSelectedPlan('season')}
               className={`p-4 rounded-2xl border cursor-pointer transition-all text-left relative ${
                 selectedPlan === 'season'
-                  ? 'border-amber-500 bg-amber-50/50 ring-2 ring-amber-500/20 shadow-xs'
-                  : 'border-slate-200 bg-slate-50 hover:bg-slate-100'
+                  ? 'border-amber-500 bg-amber-50/50 dark:bg-amber-950/50 ring-2 ring-amber-500/20 shadow-xs'
+                  : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-900'
               }`}
             >
-              <span className="text-[10px] font-bold text-amber-800 uppercase tracking-wider block">
+              <span className="text-[10px] font-bold text-amber-800 dark:text-amber-200 uppercase tracking-wider block">
                 Job Season Pass
               </span>
               <div className="mt-1 flex items-baseline gap-1">
-                <span className="text-2xl font-extrabold text-slate-900">Rs. 299</span>
-                <span className="text-xs text-slate-500">/ 30 Days</span>
+                <span className="text-2xl font-extrabold text-slate-900 dark:text-slate-100">Rs. 299</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400">/ 30 Days</span>
               </div>
-              <span className="text-[11px] text-slate-500 mt-1 block">
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 block">
                 Approx $1.05 USD
               </span>
             </div>
@@ -123,21 +123,21 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({
               onClick={() => setSelectedPlan('lifetime')}
               className={`p-4 rounded-2xl border cursor-pointer transition-all text-left relative ${
                 selectedPlan === 'lifetime'
-                  ? 'border-amber-500 bg-amber-50/50 ring-2 ring-amber-500/20 shadow-xs'
-                  : 'border-slate-200 bg-slate-50 hover:bg-slate-100'
+                  ? 'border-amber-500 bg-amber-50/50 dark:bg-amber-950/50 ring-2 ring-amber-500/20 shadow-xs'
+                  : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-900'
               }`}
             >
               <div className="absolute -top-2 right-3 bg-emerald-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-xs">
                 BEST VALUE
               </div>
-              <span className="text-[10px] font-bold text-amber-800 uppercase tracking-wider block">
+              <span className="text-[10px] font-bold text-amber-800 dark:text-amber-200 uppercase tracking-wider block">
                 Lifetime Pass
               </span>
               <div className="mt-1 flex items-baseline gap-1">
-                <span className="text-2xl font-extrabold text-slate-900">Rs. 599</span>
-                <span className="text-xs text-slate-500">one-time</span>
+                <span className="text-2xl font-extrabold text-slate-900 dark:text-slate-100">Rs. 599</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400">one-time</span>
               </div>
-              <span className="text-[11px] text-slate-500 mt-1 block">
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 block">
                 Approx $2.10 USD
               </span>
             </div>
@@ -145,24 +145,24 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({
         )}
 
         {/* Premium Features List */}
-        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 mb-6 space-y-2.5 text-xs">
-          <div className="flex items-center gap-2.5 text-slate-800 font-semibold">
+        <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 mb-6 space-y-2.5 text-xs">
+          <div className="flex items-center gap-2.5 text-slate-800 dark:text-slate-200 font-semibold">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
             <span><strong>Unlimited Daily Conversions</strong> (No 3-per-day restriction)</span>
           </div>
-          <div className="flex items-center gap-2.5 text-slate-800 font-semibold">
+          <div className="flex items-center gap-2.5 text-slate-800 dark:text-slate-200 font-semibold">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
             <span><strong>1-Click Job Bundle ZIP Downloads</strong> (Photo + Sig + CNIC + Degrees)</span>
           </div>
-          <div className="flex items-center gap-2.5 text-slate-800 font-semibold">
+          <div className="flex items-center gap-2.5 text-slate-800 dark:text-slate-200 font-semibold">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
             <span><strong>High-Resolution NADRA CNIC Combiner</strong> (No watermark)</span>
           </div>
-          <div className="flex items-center gap-2.5 text-slate-800 font-semibold">
+          <div className="flex items-center gap-2.5 text-slate-800 dark:text-slate-200 font-semibold">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
             <span><strong>Ad-Free High-Speed Experience</strong> with zero distractions</span>
           </div>
-          <div className="flex items-center gap-2.5 text-slate-800 font-semibold">
+          <div className="flex items-center gap-2.5 text-slate-800 dark:text-slate-200 font-semibold">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
             <span><strong>Zero Login Required:</strong> Instant activation tied to your browser</span>
           </div>
@@ -182,33 +182,33 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({
             </button>
 
             {/* Payment Details for Pakistan (EasyPaisa / JazzCash / Bank) */}
-            <div className="border-t border-slate-200 pt-4 space-y-3">
+            <div className="border-t border-slate-200 dark:border-slate-800 pt-4 space-y-3">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-bold text-slate-800 flex items-center gap-1.5">
+                <span className="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
                   <Smartphone className="w-4 h-4 text-emerald-600" />
                   <span>Pay via EasyPaisa / JazzCash / Raast</span>
                 </span>
-                <span className="font-mono text-emerald-700 font-bold">0300-1234567</span>
+                <span className="font-mono text-emerald-700 dark:text-emerald-300 font-bold">0300-1234567</span>
               </div>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">
                 Send <strong>Rs. {selectedPlan === 'season' ? '299' : '599'}</strong> to Title: <strong>DocFix Official</strong>. Enter your Transaction ID or use the instant promo key below.
               </p>
 
               {/* Promo Key Activation Form */}
               <form onSubmit={handleActivateCode} className="flex gap-2 pt-1">
                 <div className="relative flex-1">
-                  <KeyRound className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                  <KeyRound className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-2.5" />
                   <input
                     type="text"
                     placeholder="Enter Promo Key (Try: DOCFIXPRO)"
                     value={licenseCode}
                     onChange={(e) => setLicenseCode(e.target.value)}
-                    className="w-full text-xs pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-amber-500 outline-none uppercase font-mono font-semibold"
+                    className="w-full text-xs pl-9 pr-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:bg-white dark:focus:bg-slate-900 focus:border-amber-500 outline-none uppercase font-mono font-semibold"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer"
+                  className="px-4 py-2 bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer"
                 >
                   Activate
                 </button>
@@ -218,7 +218,7 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({
         ) : (
           /* Active status controls */
           <div className="space-y-4 text-center">
-            <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800 font-semibold flex items-center justify-center gap-2">
+            <div className="p-3 bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 rounded-xl text-xs text-emerald-800 dark:text-emerald-300 font-semibold flex items-center justify-center gap-2">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
               <span>DocFix Premium is currently ACTIVE on this device.</span>
             </div>
@@ -234,7 +234,7 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({
               <button
                 type="button"
                 onClick={handleDeactivate}
-                className="px-4 py-2.5 bg-slate-100 text-slate-600 hover:text-red-700 font-medium text-xs rounded-xl hover:bg-slate-200 transition-colors flex items-center gap-1.5"
+                className="px-4 py-2.5 bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:text-red-700 dark:hover:text-red-300 font-medium text-xs rounded-xl hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors flex items-center gap-1.5"
                 title="Reset to 3 daily limit for testing"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
@@ -248,8 +248,8 @@ export const PremiumModal: React.FC<PremiumModalProps> = ({
           <div
             className={`mt-4 p-3 rounded-xl text-xs text-center font-medium ${
               activationMsg.error
-                ? 'bg-red-50 text-red-700 border border-red-200'
-                : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                ? 'bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800'
+                : 'bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800'
             }`}
           >
             {activationMsg.text}

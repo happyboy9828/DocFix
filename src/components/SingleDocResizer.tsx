@@ -391,7 +391,7 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
               onDrop={handleDrop}
               onDragOver={(e) => e.preventDefault()}
               onClick={() => fileInputRef.current?.click()}
-              className="border-2 border-dashed border-slate-300 hover:border-emerald-500 rounded-2xl p-8 sm:p-12 text-center bg-white hover:bg-emerald-50/20 transition-all cursor-pointer group shadow-sm"
+              className="border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-emerald-500 rounded-2xl p-8 sm:p-12 text-center bg-white dark:bg-slate-900 hover:bg-emerald-50/20 dark:hover:bg-emerald-950/20 transition-all cursor-pointer group shadow-sm"
             >
               <input
                 ref={fileInputRef}
@@ -405,15 +405,15 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                 }}
               />
 
-              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-emerald-50 group-hover:bg-emerald-100 text-emerald-600 flex items-center justify-center transition-colors">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900 text-emerald-600 flex items-center justify-center transition-colors">
                 <Upload className="w-8 h-8 stroke-[2]" />
               </div>
 
-              <h3 className="text-base font-bold text-slate-800">
+              <h3 className="text-base font-bold text-slate-800 dark:text-slate-200">
                 Drag & Drop Your Photo, Signature, or Document Here
               </h3>
-              <p className="text-xs text-slate-500 mt-1 max-w-md mx-auto">
-                Supports JPG, PNG, WEBP, and camera photos. You can also paste directly using <kbd className="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[11px] font-mono">Ctrl+V</kbd>.
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-md mx-auto">
+                Supports JPG, PNG, WEBP, and camera photos. You can also paste directly using <kbd className="px-1.5 py-0.5 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded text-[11px] font-mono">Ctrl+V</kbd>.
               </p>
 
               <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
@@ -433,7 +433,7 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                     e.stopPropagation();
                     handleLoadSource(createSampleImage('passport'));
                   }}
-                  className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium rounded-xl transition-colors border border-slate-200"
+                  className="px-3.5 py-2 bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-medium rounded-xl transition-colors border border-slate-200 dark:border-slate-800"
                 >
                   Test with Sample Photo
                 </button>
@@ -443,7 +443,7 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                     e.stopPropagation();
                     handleLoadSource(createSampleImage('signature'));
                   }}
-                  className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium rounded-xl transition-colors border border-slate-200"
+                  className="px-3.5 py-2 bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-medium rounded-xl transition-colors border border-slate-200 dark:border-slate-800"
                 >
                   Test Signature
                 </button>
@@ -451,11 +451,11 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
             </div>
           ) : (
             /* Comparison Box: Original vs DocFix Processed Output */
-            <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm space-y-4">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-5 shadow-sm space-y-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <FileCheck className="w-4 h-4 text-emerald-600" />
-                  <span className="text-sm font-bold text-slate-900">Live Real-Time Preview</span>
+                  <span className="text-sm font-bold text-slate-900 dark:text-slate-100">Live Real-Time Preview</span>
                   {isProcessing && (
                     <span className="text-xs text-emerald-600 flex items-center gap-1 font-medium">
                       <RefreshCw className="w-3 h-3 animate-spin" /> Resizing...
@@ -470,7 +470,7 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                       setResult(null);
                       setSourceOriginalMeta(null);
                     }}
-                    className="text-xs text-slate-500 hover:text-slate-800 underline underline-offset-2"
+                    className="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 underline underline-offset-2"
                   >
                     Upload Different File
                   </button>
@@ -480,15 +480,15 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
               {/* Side-by-side or stacked preview */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Original File */}
-                <div className="border border-slate-200 rounded-xl p-3 bg-slate-50 flex flex-col justify-between">
+                <div className="border border-slate-200 dark:border-slate-800 rounded-xl p-3 bg-slate-50 dark:bg-slate-950 flex flex-col justify-between">
                   <div className="flex items-center justify-between text-xs mb-2">
-                    <span className="font-semibold text-slate-600">Original Document</span>
-                    <span className="text-[11px] text-slate-500">
-                      {sourceOriginalMeta ? `${sourceOriginalMeta.width}×${sourceOriginalMeta.height} px` : ''}
+                    <span className="font-semibold text-slate-600 dark:text-slate-400">Original Document</span>
+                    <span className="text-[11px] text-slate-500 dark:text-slate-400">
+                      {sourceOriginalMeta ? `${sourceOriginalMeta.width}Ã—${sourceOriginalMeta.height} px` : ''}
                     </span>
                   </div>
 
-                  <div className="h-56 flex items-center justify-center bg-white rounded-lg border border-slate-200 overflow-hidden relative">
+                  <div className="h-56 flex items-center justify-center bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 overflow-hidden relative">
                     <img
                       src={sourceDataUrl}
                       alt="Original"
@@ -496,25 +496,25 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                     />
                   </div>
 
-                  <div className="mt-2 text-xs flex items-center justify-between text-slate-500 font-mono">
+                  <div className="mt-2 text-xs flex items-center justify-between text-slate-500 dark:text-slate-400 font-mono">
                     <span>Size: {sourceOriginalMeta?.sizeKb ? `${sourceOriginalMeta.sizeKb} KB` : 'Original'}</span>
                     <span>{sourceOriginalMeta?.format || 'IMG'}</span>
                   </div>
                 </div>
 
                 {/* Processed File */}
-                <div className="border-2 border-emerald-500/50 rounded-xl p-3 bg-emerald-50/20 flex flex-col justify-between relative">
+                <div className="border-2 border-emerald-500/50 rounded-xl p-3 bg-emerald-50/20 dark:bg-emerald-950/20 flex flex-col justify-between relative">
                   <div className="flex items-center justify-between text-xs mb-2">
-                    <span className="font-bold text-emerald-900 flex items-center gap-1">
+                    <span className="font-bold text-emerald-900 dark:text-emerald-200 flex items-center gap-1">
                       <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
                       DocFix Processed
                     </span>
-                    <span className="text-[11px] font-semibold text-emerald-800">
-                      {result ? `${result.width}×${result.height} px` : ''}
+                    <span className="text-[11px] font-semibold text-emerald-800 dark:text-emerald-300">
+                      {result ? `${result.width}Ã—${result.height} px` : ''}
                     </span>
                   </div>
 
-                  <div className="h-56 flex items-center justify-center bg-white rounded-lg border border-slate-200 overflow-hidden relative shadow-inner">
+                  <div className="h-56 flex items-center justify-center bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 overflow-hidden relative shadow-inner">
                     {result ? (
                       <img
                         src={result.dataUrl}
@@ -522,7 +522,7 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                         className="max-h-full max-w-full object-contain"
                       />
                     ) : (
-                      <div className="flex items-center gap-2 text-slate-400 text-xs">
+                      <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500 text-xs">
                         <RefreshCw className="w-4 h-4 animate-spin" /> Processing...
                       </div>
                     )}
@@ -536,11 +536,11 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                   </div>
 
                   <div className="mt-2 text-xs flex items-center justify-between font-mono">
-                    <span className="font-bold text-emerald-700">
+                    <span className="font-bold text-emerald-700 dark:text-emerald-300">
                       Output: {result ? `${result.fileSizeKb} KB` : '...'}
                     </span>
-                    <span className="text-slate-600">
-                      {result?.dpi} DPI · JPG
+                    <span className="text-slate-600 dark:text-slate-400">
+                      {result?.dpi} DPI Â· JPG
                     </span>
                   </div>
                 </div>
@@ -548,15 +548,15 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
 
               {/* Portal Compliance Verdict Card */}
               {result && (
-                <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3.5 space-y-2">
+                <div className="bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 rounded-xl p-3.5 space-y-2">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                      <span className="text-xs font-bold text-emerald-950 uppercase tracking-wider">
+                      <span className="text-xs font-bold text-emerald-950 dark:text-emerald-100 uppercase tracking-wider">
                         {currentPortal ? `${currentPortal.shortName} Portal Compliance: PASSED` : 'Target Specifications Met'}
                       </span>
                     </div>
-                    <span className="text-[11px] font-mono text-emerald-800">
+                    <span className="text-[11px] font-mono text-emerald-800 dark:text-emerald-300">
                       Processed in {result.processingTimeMs}ms
                     </span>
                   </div>
@@ -564,9 +564,9 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                   {/* Checklist */}
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-xs">
                     {result.complianceChecks.map((check, idx) => (
-                      <div key={idx} className="bg-white/80 border border-emerald-200/60 rounded-lg p-2">
-                        <div className="text-[10px] text-slate-500 font-medium">{check.label}</div>
-                        <div className="font-bold text-slate-900 mt-0.5 flex items-center gap-1">
+                      <div key={idx} className="bg-white/80 dark:bg-slate-900/80 border border-emerald-200/60 dark:border-emerald-800/60 rounded-lg p-2">
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">{check.label}</div>
+                        <div className="font-bold text-slate-900 dark:text-slate-100 mt-0.5 flex items-center gap-1">
                           <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
                           <span>{check.actual}</span>
                         </div>
@@ -588,7 +588,7 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                     className="flex-1 min-w-[200px] flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold py-3.5 px-5 rounded-xl shadow-md transition-all cursor-pointer"
                   >
                     <Crown className="w-5 h-5 fill-slate-950" />
-                    <span>Daily Limit Reached (3/3) · Buy Premium to Download</span>
+                    <span>Daily Limit Reached (3/3) Â· Buy Premium to Download</span>
                   </button>
                 ) : (
                   <button
@@ -606,7 +606,7 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                   type="button"
                   onClick={handleDownloadPdf}
                   disabled={!result}
-                  className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-medium py-3 px-4 rounded-xl shadow-sm transition-all disabled:opacity-50 text-xs cursor-pointer"
+                  className="flex items-center gap-2 bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white font-medium py-3 px-4 rounded-xl shadow-sm transition-all disabled:opacity-50 text-xs cursor-pointer"
                   title="Download as single-page PDF"
                 >
                   <FileText className="w-4 h-4" />
@@ -617,7 +617,7 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                   type="button"
                   onClick={handleCopyToClipboard}
                   disabled={!result}
-                  className="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-3 px-3.5 rounded-xl border border-slate-200 text-xs transition-colors disabled:opacity-50 cursor-pointer"
+                  className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium py-3 px-3.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs transition-colors disabled:opacity-50 cursor-pointer"
                   title="Copy resized image to clipboard"
                 >
                   <Copy className="w-4 h-4" />
@@ -628,8 +628,8 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
           )}
 
           {errorMessage && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-800 flex items-center gap-2">
-              <AlertTriangle className="w-4 h-4 text-red-600 shrink-0" />
+            <div className="p-3 bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-xl text-xs text-red-800 dark:text-red-300 flex items-center gap-2">
+              <AlertTriangle className="w-4 h-4 text-red-600 dark:text-red-400 shrink-0" />
               <span>{errorMessage}</span>
             </div>
           )}
@@ -637,23 +637,23 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
 
         {/* Right Column: Exact Controls (5 cols) */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm space-y-5">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-5 shadow-sm space-y-5">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2">
-                <Sliders className="w-4 h-4 text-slate-700" />
-                <h3 className="text-sm font-bold text-slate-900">Document Specifications</h3>
+                <Sliders className="w-4 h-4 text-slate-700 dark:text-slate-300" />
+                <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Document Specifications</h3>
               </div>
-              <span className="text-[11px] text-slate-500">Auto-tuned</span>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400">Auto-tuned</span>
             </div>
 
             {/* Target File Size Slider & Presets */}
             <div className="space-y-2">
               <div className="flex items-center justify-between text-xs">
-                <label className="font-bold text-slate-800">
+                <label className="font-bold text-slate-800 dark:text-slate-200">
                   Target File Size Ceiling
                 </label>
-                <div className="flex items-center gap-1 font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                  <span>≤</span>
+                <div className="flex items-center gap-1 font-mono font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
+                  <span>â‰¤</span>
                   <input
                     type="number"
                     min="5"
@@ -674,7 +674,7 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                 step="5"
                 value={targetMaxKb}
                 onChange={(e) => setTargetMaxKb(Number(e.target.value))}
-                className="w-full accent-emerald-600 cursor-pointer h-2 bg-slate-100 rounded-lg"
+                className="w-full accent-emerald-600 cursor-pointer h-2 bg-slate-100 dark:bg-slate-900 rounded-lg"
               />
 
               {/* Quick KB Buttons */}
@@ -695,7 +695,7 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                     className={`text-[11px] px-2 py-1 rounded-md border font-medium transition-colors ${
                       targetMaxKb === item.val
                         ? 'bg-emerald-600 text-white border-emerald-600 font-bold'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                        : 'bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-900'
                     }`}
                   >
                     {item.label}
@@ -705,15 +705,15 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
             </div>
 
             {/* Dimensions: Width x Height */}
-            <div className="space-y-2 pt-2 border-t border-slate-100">
+            <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
               <div className="flex items-center justify-between text-xs">
-                <label className="font-bold text-slate-800">
+                <label className="font-bold text-slate-800 dark:text-slate-200">
                   Target Dimensions (Pixels)
                 </label>
                 <button
                   type="button"
                   onClick={() => setCropToFit(!cropToFit)}
-                  className="text-[11px] text-emerald-700 hover:underline font-medium"
+                  className="text-[11px] text-emerald-700 dark:text-emerald-300 hover:underline font-medium"
                 >
                   Mode: {cropToFit ? 'Center Crop' : 'Exact Stretch'}
                 </button>
@@ -721,7 +721,7 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <span className="text-[10px] text-slate-500 font-medium">Width</span>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Width</span>
                   <div className="relative mt-1">
                     <input
                       type="number"
@@ -731,14 +731,14 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                         setTargetWidth(w);
                         if (lockAspectRatio) setTargetHeight(w);
                       }}
-                      className="w-full text-xs font-mono font-semibold px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-emerald-500 outline-none"
+                      className="w-full text-xs font-mono font-semibold px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg focus:bg-white dark:focus:bg-slate-900 focus:border-emerald-500 outline-none"
                     />
-                    <span className="absolute right-2.5 top-2 text-[10px] text-slate-400">px</span>
+                    <span className="absolute right-2.5 top-2 text-[10px] text-slate-400 dark:text-slate-500">px</span>
                   </div>
                 </div>
 
                 <div>
-                  <span className="text-[10px] text-slate-500 font-medium">Height</span>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Height</span>
                   <div className="relative mt-1">
                     <input
                       type="number"
@@ -748,9 +748,9 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                         setTargetHeight(h);
                         if (lockAspectRatio) setTargetWidth(h);
                       }}
-                      className="w-full text-xs font-mono font-semibold px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-emerald-500 outline-none"
+                      className="w-full text-xs font-mono font-semibold px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg focus:bg-white dark:focus:bg-slate-900 focus:border-emerald-500 outline-none"
                     />
-                    <span className="absolute right-2.5 top-2 text-[10px] text-slate-400">px</span>
+                    <span className="absolute right-2.5 top-2 text-[10px] text-slate-400 dark:text-slate-500">px</span>
                   </div>
                 </div>
               </div>
@@ -758,12 +758,12 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
               {/* Quick Dimension Buttons */}
               <div className="flex flex-wrap gap-1.5 pt-1">
                 {[
-                  { label: '150×150 (FPSC/PPSC)', w: 150, h: 150 },
-                  { label: '200×200 (NTS)', w: 200, h: 200 },
-                  { label: '300×300 (NJP)', w: 300, h: 300 },
-                  { label: '600×600 (Passport 2x2")', w: 600, h: 600 },
-                  { label: '140×60 (Signature)', w: 140, h: 60 },
-                  { label: '300×350 (University)', w: 300, h: 350 }
+                  { label: '150Ã—150 (FPSC/PPSC)', w: 150, h: 150 },
+                  { label: '200Ã—200 (NTS)', w: 200, h: 200 },
+                  { label: '300Ã—300 (NJP)', w: 300, h: 300 },
+                  { label: '600Ã—600 (Passport 2x2")', w: 600, h: 600 },
+                  { label: '140Ã—60 (Signature)', w: 140, h: 60 },
+                  { label: '300Ã—350 (University)', w: 300, h: 350 }
                 ].map((preset, idx) => (
                   <button
                     key={idx}
@@ -775,8 +775,8 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                     }}
                     className={`text-[11px] px-2 py-1 rounded-md border font-medium transition-colors ${
                       targetWidth === preset.w && targetHeight === preset.h
-                        ? 'bg-slate-900 text-white border-slate-900 font-bold'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                        ? 'bg-slate-900 dark:bg-slate-800 text-white border-slate-900 dark:border-slate-600 font-bold'
+                        : 'bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-900'
                     }`}
                   >
                     {preset.label}
@@ -786,9 +786,9 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
             </div>
 
             {/* DPI & Format */}
-            <div className="grid grid-cols-2 gap-3 pt-2 border-t border-slate-100">
+            <div className="grid grid-cols-2 gap-3 pt-2 border-t border-slate-100 dark:border-slate-800">
               <div>
-                <label className="text-xs font-bold text-slate-800 block mb-1.5">
+                <label className="text-xs font-bold text-slate-800 dark:text-slate-200 block mb-1.5">
                   Resolution (DPI)
                 </label>
                 <div className="grid grid-cols-3 gap-1">
@@ -800,20 +800,20 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                       className={`text-[11px] py-1.5 rounded-lg border font-semibold transition-colors ${
                         targetDpi === dpiVal
                           ? 'bg-emerald-600 text-white border-emerald-600'
-                          : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                          : 'bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-900'
                       }`}
                     >
                       {dpiVal}
                     </button>
                   ))}
                 </div>
-                <span className="text-[10px] text-slate-500 mt-1 block">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 block">
                   JFIF APP0 tag injected
                 </span>
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-800 block mb-1.5">
+                <label className="text-xs font-bold text-slate-800 dark:text-slate-200 block mb-1.5">
                   Output Format
                 </label>
                 <div className="grid grid-cols-2 gap-1">
@@ -828,22 +828,22 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                       className={`text-[11px] py-1.5 rounded-lg border font-semibold transition-colors ${
                         outputFormat === fmt.val
                           ? 'bg-emerald-600 text-white border-emerald-600'
-                          : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                          : 'bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-900'
                       }`}
                     >
                       {fmt.label}
                     </button>
                   ))}
                 </div>
-                <span className="text-[10px] text-emerald-700 mt-1 block">
+                <span className="text-[10px] text-emerald-700 dark:text-emerald-300 mt-1 block">
                   JPG is required by 99% portals
                 </span>
               </div>
             </div>
 
             {/* Background & Photo Enhancements */}
-            <div className="space-y-2 pt-2 border-t border-slate-100">
-              <label className="text-xs font-bold text-slate-800 block">
+            <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+              <label className="text-xs font-bold text-slate-800 dark:text-slate-200 block">
                 Background & Document Enhancer
               </label>
 
@@ -853,12 +853,12 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                   onClick={() => setBackgroundAdjustment('none')}
                   className={`text-xs p-2 rounded-xl border text-left transition-colors ${
                     backgroundAdjustment === 'none'
-                      ? 'bg-emerald-50 border-emerald-600 text-emerald-950 font-semibold'
-                      : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
+                      ? 'bg-emerald-50 dark:bg-emerald-950 border-emerald-600 text-emerald-950 dark:text-emerald-100 font-semibold'
+                      : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900'
                   }`}
                 >
                   <div className="font-bold text-[11px]">Natural / Original</div>
-                  <div className="text-[10px] text-slate-500">Keep as-is</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Keep as-is</div>
                 </button>
 
                 <button
@@ -866,12 +866,12 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                   onClick={() => setBackgroundAdjustment('light_blue')}
                   className={`text-xs p-2 rounded-xl border text-left transition-colors ${
                     backgroundAdjustment === 'light_blue'
-                      ? 'bg-emerald-50 border-emerald-600 text-emerald-950 font-semibold'
-                      : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
+                      ? 'bg-emerald-50 dark:bg-emerald-950 border-emerald-600 text-emerald-950 dark:text-emerald-100 font-semibold'
+                      : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900'
                   }`}
                 >
                   <div className="font-bold text-[11px]">Light Sky Blue Tint</div>
-                  <div className="text-[10px] text-slate-500">FPSC standard backdrop</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">FPSC standard backdrop</div>
                 </button>
 
                 <button
@@ -879,12 +879,12 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                   onClick={() => setBackgroundAdjustment('white')}
                   className={`text-xs p-2 rounded-xl border text-left transition-colors ${
                     backgroundAdjustment === 'white'
-                      ? 'bg-emerald-50 border-emerald-600 text-emerald-950 font-semibold'
-                      : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
+                      ? 'bg-emerald-50 dark:bg-emerald-950 border-emerald-600 text-emerald-950 dark:text-emerald-100 font-semibold'
+                      : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900'
                   }`}
                 >
                   <div className="font-bold text-[11px]">Pure White Backdrop</div>
-                  <div className="text-[10px] text-slate-500">NADRA / KPPSC / Visa</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">NADRA / KPPSC / Visa</div>
                 </button>
 
                 <button
@@ -892,19 +892,19 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                   onClick={() => setBackgroundAdjustment('signature_clean')}
                   className={`text-xs p-2 rounded-xl border text-left transition-colors ${
                     backgroundAdjustment === 'signature_clean'
-                      ? 'bg-emerald-50 border-emerald-600 text-emerald-950 font-semibold'
-                      : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
+                      ? 'bg-emerald-50 dark:bg-emerald-950 border-emerald-600 text-emerald-950 dark:text-emerald-100 font-semibold'
+                      : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900'
                   }`}
                 >
                   <div className="font-bold text-[11px]">Signature Clean (B&W)</div>
-                  <div className="text-[10px] text-slate-500">Removes paper shadows</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Removes paper shadows</div>
                 </button>
               </div>
 
               {/* Sliders for Contrast & Brightness */}
               <div className="grid grid-cols-2 gap-3 pt-2">
                 <div>
-                  <div className="flex justify-between text-[10px] font-semibold text-slate-600 mb-1">
+                  <div className="flex justify-between text-[10px] font-semibold text-slate-600 dark:text-slate-400 mb-1">
                     <span>Contrast</span>
                     <span>{contrast > 0 ? `+${contrast}` : contrast}</span>
                   </div>
@@ -914,12 +914,12 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                     max="50"
                     value={contrast}
                     onChange={(e) => setContrast(Number(e.target.value))}
-                    className="w-full accent-slate-700 cursor-pointer h-1.5 bg-slate-200 rounded"
+                    className="w-full accent-slate-700 dark:accent-slate-300 cursor-pointer h-1.5 bg-slate-200 dark:bg-slate-800 rounded"
                   />
                 </div>
 
                 <div>
-                  <div className="flex justify-between text-[10px] font-semibold text-slate-600 mb-1">
+                  <div className="flex justify-between text-[10px] font-semibold text-slate-600 dark:text-slate-400 mb-1">
                     <span>Brightness</span>
                     <span>{brightness > 0 ? `+${brightness}` : brightness}</span>
                   </div>
@@ -929,7 +929,7 @@ export const SingleDocResizer: React.FC<SingleDocResizerProps> = ({
                     max="40"
                     value={brightness}
                     onChange={(e) => setBrightness(Number(e.target.value))}
-                    className="w-full accent-slate-700 cursor-pointer h-1.5 bg-slate-200 rounded"
+                    className="w-full accent-slate-700 dark:accent-slate-300 cursor-pointer h-1.5 bg-slate-200 dark:bg-slate-800 rounded"
                   />
                 </div>
               </div>

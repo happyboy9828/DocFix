@@ -15,7 +15,7 @@ const FAQS: FaqItem[] = [
   },
   {
     category: 'FPSC & PPSC Rules',
-    question: 'How does DocFix compress images to PPSC’s strict 25KB without making them blurry?',
+    question: 'How does DocFix compress images to PPSCâ€™s strict 25KB without making them blurry?',
     answer: 'PPSC has one of the strictest ceilings in Pakistan: exactly 25KB for passport photos, CNIC front, and bank challan receipts. Typical compressors reduce the overall image quality to 10%, causing faces and numbers to become a blurry smear. DocFix first resizes the canvas to exactly 150x150 pixels (the official PPSC dimension requirement), applies an unsharp mask filter on text edges, and applies high-density Chroma subsampling to preserve readable facial and numeric features at 23KB.'
   },
   {
@@ -26,7 +26,7 @@ const FAQS: FaqItem[] = [
   {
     category: 'Privacy & Security',
     question: 'Is it safe to upload my CNIC, signature, and educational degrees to DocFix?',
-    answer: 'Yes, 100% safe. DocFix was specifically architected with a decentralized, zero-server-upload model. When you drag and drop your CNIC or photograph, the file is read directly into your device’s local browser memory. No image data is transmitted across the internet to our servers. Once you close the tab, all image buffers in your device RAM are completely cleared.'
+    answer: 'Yes, 100% safe. DocFix was specifically architected with a decentralized, zero-server-upload model. When you drag and drop your CNIC or photograph, the file is read directly into your deviceâ€™s local browser memory. No image data is transmitted across the internet to our servers. Once you close the tab, all image buffers in your device RAM are completely cleared.'
   },
   {
     category: 'CNIC Merging',
@@ -36,7 +36,7 @@ const FAQS: FaqItem[] = [
   {
     category: 'Signatures & Background',
     question: 'How do I fix yellow paper and room shadows on my signature photo?',
-    answer: 'When you take a smartphone photo of your signature on paper, room lighting creates a dull grey or yellow backdrop. Government portals reject signatures that lack pure white backgrounds. In DocFix’s Resizer, select the "Signature Clean (B&W)" filter. Our algorithm converts paper greys to pure white (RGB 255, 255, 255) while darkening blue or black ink strokes, producing a studio-grade scan under 20KB.'
+    answer: 'When you take a smartphone photo of your signature on paper, room lighting creates a dull grey or yellow backdrop. Government portals reject signatures that lack pure white backgrounds. In DocFixâ€™s Resizer, select the "Signature Clean (B&W)" filter. Our algorithm converts paper greys to pure white (RGB 255, 255, 255) while darkening blue or black ink strokes, producing a studio-grade scan under 20KB.'
   },
   {
     category: 'Formats & Compatibility',
@@ -58,18 +58,18 @@ export const FaqSection: React.FC = () => {
   };
 
   return (
-    <section className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+    <section className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
       <div className="max-w-2xl">
         <div className="flex items-center gap-2">
           <HelpCircle className="w-5 h-5 text-emerald-600" />
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
             Frequently Asked Questions
           </span>
         </div>
-        <h2 className="text-xl font-bold text-slate-900 mt-1">
+        <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 mt-1">
           Everything You Need to Know About Government Job Document Requirements
         </h2>
-        <p className="text-xs text-slate-600 mt-1">
+        <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
           Detailed answers prepared by civil service applicants and document formatting specialists.
         </p>
       </div>
@@ -80,24 +80,24 @@ export const FaqSection: React.FC = () => {
           return (
             <div
               key={idx}
-              className="border border-slate-200 rounded-xl overflow-hidden transition-all bg-slate-50/50"
+              className="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden transition-all bg-slate-50/50 dark:bg-slate-950/50"
             >
               <button
                 type="button"
                 onClick={() => toggleFaq(idx)}
-                className="w-full py-3.5 px-4 text-left flex items-center justify-between gap-3 text-xs sm:text-sm font-bold text-slate-900 hover:text-emerald-700 transition-colors"
+                className="w-full py-3.5 px-4 text-left flex items-center justify-between gap-3 text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors"
               >
                 <span className="leading-snug">{faq.question}</span>
                 {isOpen ? (
                   <ChevronUp className="w-4 h-4 text-emerald-600 shrink-0" />
                 ) : (
-                  <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
+                  <ChevronDown className="w-4 h-4 text-slate-400 dark:text-slate-500 shrink-0" />
                 )}
               </button>
 
               {isOpen && (
-                <div className="px-4 pb-4 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-200/60 bg-white">
-                  <div className="text-[10px] font-mono font-bold text-emerald-700 mb-1.5">
+                <div className="px-4 pb-4 pt-1 text-xs text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-200/60 dark:border-slate-800/60 bg-white dark:bg-slate-900">
+                  <div className="text-[10px] font-mono font-bold text-emerald-700 dark:text-emerald-300 mb-1.5">
                     {faq.category}
                   </div>
                   <p>{faq.answer}</p>

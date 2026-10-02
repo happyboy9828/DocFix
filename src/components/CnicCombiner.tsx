@@ -225,7 +225,7 @@ export const CnicCombiner: React.FC<CnicCombinerProps> = ({
         <div>
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold uppercase tracking-wider text-emerald-300">Official Tool</span>
-            <span className="text-xs text-emerald-400">·</span>
+            <span className="text-xs text-emerald-400">Â·</span>
             <span className="text-xs text-emerald-200">Single Upload Slot Fix</span>
           </div>
           <h2 className="text-lg font-bold mt-1 text-white">
@@ -251,13 +251,13 @@ export const CnicCombiner: React.FC<CnicCombinerProps> = ({
           {/* Dual upload cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Front Side */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex flex-col justify-between space-y-3">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm flex flex-col justify-between space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-800">1. CNIC Front Side</span>
+                <span className="text-xs font-bold text-slate-800 dark:text-slate-200">1. CNIC Front Side</span>
                 {frontDataUrl && (
                   <button
                     onClick={() => setFrontDataUrl(null)}
-                    className="text-[11px] text-red-600 hover:underline"
+                    className="text-[11px] text-red-600 dark:text-red-400 hover:underline"
                   >
                     Remove
                   </button>
@@ -273,37 +273,37 @@ export const CnicCombiner: React.FC<CnicCombinerProps> = ({
               />
 
               {frontDataUrl ? (
-                <div className="h-40 rounded-xl overflow-hidden border border-slate-200 bg-slate-50 flex items-center justify-center">
+                <div className="h-40 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex items-center justify-center">
                   <img src={frontDataUrl} alt="Front" className="max-h-full max-w-full object-contain" />
                 </div>
               ) : (
                 <div
                   onClick={() => frontInputRef.current?.click()}
-                  className="h-40 rounded-xl border-2 border-dashed border-slate-300 hover:border-emerald-500 bg-slate-50 hover:bg-emerald-50/30 flex flex-col items-center justify-center cursor-pointer transition-colors p-4 text-center"
+                  className="h-40 rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-emerald-500 bg-slate-50 dark:bg-slate-950 hover:bg-emerald-50/30 dark:hover:bg-emerald-950/30 flex flex-col items-center justify-center cursor-pointer transition-colors p-4 text-center"
                 >
-                  <Upload className="w-6 h-6 text-slate-400 mb-1" />
-                  <span className="text-xs font-semibold text-slate-700">Upload Front Side</span>
-                  <span className="text-[10px] text-slate-400 mt-0.5">Photo, Name & CNIC Number</span>
+                  <Upload className="w-6 h-6 text-slate-400 dark:text-slate-500 mb-1" />
+                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Upload Front Side</span>
+                  <span className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">Photo, Name & CNIC Number</span>
                 </div>
               )}
 
               <button
                 type="button"
                 onClick={() => frontInputRef.current?.click()}
-                className="w-full py-1.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-medium rounded-lg transition-colors"
+                className="w-full py-1.5 px-3 bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg transition-colors"
               >
                 {frontDataUrl ? 'Change Front Image' : 'Select Front File'}
               </button>
             </div>
 
             {/* Back Side */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex flex-col justify-between space-y-3">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm flex flex-col justify-between space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-800">2. CNIC Back Side</span>
+                <span className="text-xs font-bold text-slate-800 dark:text-slate-200">2. CNIC Back Side</span>
                 {backDataUrl && (
                   <button
                     onClick={() => setBackDataUrl(null)}
-                    className="text-[11px] text-red-600 hover:underline"
+                    className="text-[11px] text-red-600 dark:text-red-400 hover:underline"
                   >
                     Remove
                   </button>
@@ -319,24 +319,24 @@ export const CnicCombiner: React.FC<CnicCombinerProps> = ({
               />
 
               {backDataUrl ? (
-                <div className="h-40 rounded-xl overflow-hidden border border-slate-200 bg-slate-50 flex items-center justify-center">
+                <div className="h-40 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex items-center justify-center">
                   <img src={backDataUrl} alt="Back" className="max-h-full max-w-full object-contain" />
                 </div>
               ) : (
                 <div
                   onClick={() => backInputRef.current?.click()}
-                  className="h-40 rounded-xl border-2 border-dashed border-slate-300 hover:border-emerald-500 bg-slate-50 hover:bg-emerald-50/30 flex flex-col items-center justify-center cursor-pointer transition-colors p-4 text-center"
+                  className="h-40 rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-emerald-500 bg-slate-50 dark:bg-slate-950 hover:bg-emerald-50/30 dark:hover:bg-emerald-950/30 flex flex-col items-center justify-center cursor-pointer transition-colors p-4 text-center"
                 >
-                  <Upload className="w-6 h-6 text-slate-400 mb-1" />
-                  <span className="text-xs font-semibold text-slate-700">Upload Back Side</span>
-                  <span className="text-[10px] text-slate-400 mt-0.5">Address & Barcode Side</span>
+                  <Upload className="w-6 h-6 text-slate-400 dark:text-slate-500 mb-1" />
+                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Upload Back Side</span>
+                  <span className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">Address & Barcode Side</span>
                 </div>
               )}
 
               <button
                 type="button"
                 onClick={() => backInputRef.current?.click()}
-                className="w-full py-1.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-medium rounded-lg transition-colors"
+                className="w-full py-1.5 px-3 bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg transition-colors"
               >
                 {backDataUrl ? 'Change Back Image' : 'Select Back File'}
               </button>
@@ -344,8 +344,8 @@ export const CnicCombiner: React.FC<CnicCombinerProps> = ({
           </div>
 
           {/* Configuration Options */}
-          <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm space-y-4">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-5 shadow-sm space-y-4">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Layout & Output Options
             </h3>
 
@@ -362,21 +362,21 @@ export const CnicCombiner: React.FC<CnicCombinerProps> = ({
                   onClick={() => setLayout(opt.id as any)}
                   className={`p-2.5 rounded-xl border text-left transition-all ${
                     layout === opt.id
-                      ? 'border-emerald-600 bg-emerald-50/70 text-emerald-950 font-bold shadow-xs'
-                      : 'border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100'
+                      ? 'border-emerald-600 bg-emerald-50/70 dark:bg-emerald-950/70 text-emerald-950 dark:text-emerald-100 font-bold shadow-xs'
+                      : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900'
                   }`}
                 >
                   <div className="text-xs font-bold">{opt.label}</div>
-                  <div className="text-[10px] text-slate-500 mt-0.5">{opt.desc}</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">{opt.desc}</div>
                 </button>
               ))}
             </div>
 
             {/* Target size limit */}
-            <div className="space-y-1.5 pt-2 border-t border-slate-100">
+            <div className="space-y-1.5 pt-2 border-t border-slate-100 dark:border-slate-800">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-bold text-slate-800">Target File Size</span>
-                <span className="font-bold text-emerald-700 font-mono">≤ {targetMaxKb} KB</span>
+                <span className="font-bold text-slate-800 dark:text-slate-200">Target File Size</span>
+                <span className="font-bold text-emerald-700 dark:text-emerald-300 font-mono">â‰¤ {targetMaxKb} KB</span>
               </div>
               <div className="flex gap-2">
                 {[
@@ -391,7 +391,7 @@ export const CnicCombiner: React.FC<CnicCombinerProps> = ({
                     className={`text-xs py-1.5 px-3 rounded-lg border font-medium ${
                       targetMaxKb === item.val
                         ? 'bg-emerald-600 text-white border-emerald-600 font-bold'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                        : 'bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-900'
                     }`}
                   >
                     {item.label}
@@ -401,7 +401,7 @@ export const CnicCombiner: React.FC<CnicCombinerProps> = ({
             </div>
 
             {/* Checkbox enhancements */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-slate-100 text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
               <label className="flex items-center gap-2 cursor-pointer select-none">
                 <input
                   type="checkbox"
@@ -409,7 +409,7 @@ export const CnicCombiner: React.FC<CnicCombinerProps> = ({
                   onChange={(e) => setContrastBoost(e.target.checked)}
                   className="rounded text-emerald-600 accent-emerald-600 w-4 h-4"
                 />
-                <span className="font-medium text-slate-800">Boost Text Clarity</span>
+                <span className="font-medium text-slate-800 dark:text-slate-200">Boost Text Clarity</span>
               </label>
 
               <label className="flex items-center gap-2 cursor-pointer select-none">
@@ -419,7 +419,7 @@ export const CnicCombiner: React.FC<CnicCombinerProps> = ({
                   onChange={(e) => setAddBorder(e.target.checked)}
                   className="rounded text-emerald-600 accent-emerald-600 w-4 h-4"
                 />
-                <span className="font-medium text-slate-800">Clean Card Border</span>
+                <span className="font-medium text-slate-800 dark:text-slate-200">Clean Card Border</span>
               </label>
 
               <label className="flex items-center gap-2 cursor-pointer select-none">
@@ -429,7 +429,7 @@ export const CnicCombiner: React.FC<CnicCombinerProps> = ({
                   onChange={(e) => setAddWatermarkDate(e.target.checked)}
                   className="rounded text-emerald-600 accent-emerald-600 w-4 h-4"
                 />
-                <span className="font-medium text-slate-800">Date & Purpose Stamp</span>
+                <span className="font-medium text-slate-800 dark:text-slate-200">Date & Purpose Stamp</span>
               </label>
             </div>
           </div>
@@ -437,46 +437,46 @@ export const CnicCombiner: React.FC<CnicCombinerProps> = ({
 
         {/* Live Merged Result Preview (5 cols) */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm space-y-4">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-5 shadow-sm space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Layers className="w-4 h-4 text-emerald-600" />
-                <h3 className="text-sm font-bold text-slate-900">Combined Document Preview</h3>
+                <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Combined Document Preview</h3>
               </div>
               {result && (
-                <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                <span className="text-xs font-mono font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
                   {result.fileSizeKb} KB / {targetMaxKb} KB
                 </span>
               )}
             </div>
 
             {/* Document display area */}
-            <div className="min-h-[320px] max-h-[460px] bg-slate-100 rounded-xl border border-slate-200 flex items-center justify-center p-3 overflow-hidden relative">
+            <div className="min-h-[320px] max-h-[460px] bg-slate-100 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-center p-3 overflow-hidden relative">
               {result ? (
                 outputFormat === 'application/pdf' ? (
                   <div className="text-center space-y-3">
                     <FileText className="w-16 h-16 text-emerald-600 mx-auto" />
                     <div>
-                      <div className="text-sm font-bold text-slate-800">Single Page Combined PDF</div>
-                      <div className="text-xs text-slate-500 mt-0.5">Size: {result.fileSizeKb} KB · Ready to Submit</div>
+                      <div className="text-sm font-bold text-slate-800 dark:text-slate-200">Single Page Combined PDF</div>
+                      <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Size: {result.fileSizeKb} KB Â· Ready to Submit</div>
                     </div>
                   </div>
                 ) : (
                   <img
                     src={result.dataUrl}
                     alt="Combined CNIC"
-                    className="max-h-full max-w-full object-contain shadow-md rounded border border-slate-200"
+                    className="max-h-full max-w-full object-contain shadow-md rounded border border-slate-200 dark:border-slate-800"
                   />
                 )
               ) : (
-                <div className="text-center text-slate-400 text-xs p-6">
+                <div className="text-center text-slate-400 dark:text-slate-500 text-xs p-6">
                   <Layers className="w-10 h-10 mx-auto mb-2 opacity-40" />
                   <p>Upload Front and Back sides (or click "Load Sample CNIC Cards") to see the live combined document.</p>
                 </div>
               )}
 
               {isProcessing && (
-                <div className="absolute inset-0 bg-white/70 backdrop-blur-xs flex items-center justify-center text-xs font-semibold text-emerald-800 gap-2">
+                <div className="absolute inset-0 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xs flex items-center justify-center text-xs font-semibold text-emerald-800 dark:text-emerald-300 gap-2">
                   <RefreshCw className="w-4 h-4 animate-spin text-emerald-600" />
                   Generating merged document...
                 </div>
@@ -486,7 +486,7 @@ export const CnicCombiner: React.FC<CnicCombinerProps> = ({
             {/* Format choice & download buttons */}
             <div className="space-y-3 pt-2">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-bold text-slate-700">Export File Type</span>
+                <span className="font-bold text-slate-700 dark:text-slate-300">Export File Type</span>
                 <div className="flex gap-1.5">
                   <button
                     type="button"
@@ -494,7 +494,7 @@ export const CnicCombiner: React.FC<CnicCombinerProps> = ({
                     className={`px-3 py-1 rounded-md text-xs font-semibold ${
                       outputFormat === 'image/jpeg'
                         ? 'bg-emerald-600 text-white'
-                        : 'bg-slate-100 text-slate-700'
+                        : 'bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300'
                     }`}
                   >
                     JPG (Best for FPSC/PPSC)
@@ -505,7 +505,7 @@ export const CnicCombiner: React.FC<CnicCombinerProps> = ({
                     className={`px-3 py-1 rounded-md text-xs font-semibold ${
                       outputFormat === 'application/pdf'
                         ? 'bg-emerald-600 text-white'
-                        : 'bg-slate-100 text-slate-700'
+                        : 'bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300'
                     }`}
                   >
                     PDF (Best for CSS/NJP)
@@ -523,7 +523,7 @@ export const CnicCombiner: React.FC<CnicCombinerProps> = ({
                   className="w-full py-3.5 px-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold text-xs rounded-xl shadow-md flex items-center justify-center gap-2 cursor-pointer transition-all"
                 >
                   <Crown className="w-4 h-4 fill-slate-950" />
-                  <span>Daily Limit Reached (3/3) · Buy Premium to Download</span>
+                  <span>Daily Limit Reached (3/3) Â· Buy Premium to Download</span>
                 </button>
               ) : (
                 <button
@@ -539,9 +539,9 @@ export const CnicCombiner: React.FC<CnicCombinerProps> = ({
                 </button>
               )}
 
-              <div className="flex items-center gap-2 text-[11px] text-slate-500 justify-center">
+              <div className="flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400 justify-center">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Zero server upload · 100% private in-browser generation</span>
+                <span>Zero server upload Â· 100% private in-browser generation</span>
               </div>
             </div>
           </div>

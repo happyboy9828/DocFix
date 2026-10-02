@@ -126,17 +126,17 @@ export const JobBundlePack: React.FC<JobBundlePackProps> = ({
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-slate-900 text-white rounded-2xl p-5 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="bg-slate-900 dark:bg-slate-800 text-white rounded-2xl p-5 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">All-in-One Generator</span>
-            <span className="text-xs text-slate-500">·</span>
-            <span className="text-xs text-slate-300">Complete Job Application Kit</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400">Â·</span>
+            <span className="text-xs text-slate-300 dark:text-slate-600">Complete Job Application Kit</span>
           </div>
           <h2 className="text-lg font-bold mt-1 text-white">
             1-Click Job Application Document Bundle
           </h2>
-          <p className="text-xs text-slate-300 mt-1 max-w-2xl">
+          <p className="text-xs text-slate-300 dark:text-slate-600 mt-1 max-w-2xl">
             Upload your photo, signature, CNIC, and degree once. DocFix formats every single file to match the commission's exact rules, embeds 200 DPI, and packages them into a clean ZIP archive ready for submission.
           </p>
         </div>
@@ -151,8 +151,8 @@ export const JobBundlePack: React.FC<JobBundlePackProps> = ({
       </div>
 
       {/* Target Portal Chooser */}
-      <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-3">
-        <label className="text-xs font-bold uppercase tracking-wider text-slate-500">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm space-y-3">
+        <label className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
           Target Recruitment Portal
         </label>
         <div className="flex flex-wrap gap-2">
@@ -164,7 +164,7 @@ export const JobBundlePack: React.FC<JobBundlePackProps> = ({
               className={`px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all ${
                 activePortalId === portal.id
                   ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
-                  : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                  : 'bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-900'
               }`}
             >
               {portal.name}
@@ -176,92 +176,92 @@ export const JobBundlePack: React.FC<JobBundlePackProps> = ({
       {/* 4 Upload Slots */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* 1. Passport Photo */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex flex-col justify-between space-y-3">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm flex flex-col justify-between space-y-3">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-slate-900">1. Passport Photo</span>
+              <span className="text-xs font-bold text-slate-900 dark:text-slate-100">1. Passport Photo</span>
               {photoFile && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />}
             </div>
-            <p className="text-[11px] text-slate-500 mt-0.5">
-              Will resize to {currentPortal.photoSpecs.widthPx}x{currentPortal.photoSpecs.heightPx}, ≤{currentPortal.photoSpecs.maxKb}KB
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+              Will resize to {currentPortal.photoSpecs.widthPx}x{currentPortal.photoSpecs.heightPx}, â‰¤{currentPortal.photoSpecs.maxKb}KB
             </p>
           </div>
 
-          <label className="border-2 border-dashed border-slate-200 hover:border-emerald-500 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer bg-slate-50 hover:bg-emerald-50/20 transition-all text-center">
+          <label className="border-2 border-dashed border-slate-200 dark:border-slate-800 hover:border-emerald-500 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer bg-slate-50 dark:bg-slate-950 hover:bg-emerald-50/20 dark:hover:bg-emerald-950/20 transition-all text-center">
             <input
               type="file"
               accept="image/*"
               className="hidden"
               onChange={(e) => e.target.files && setPhotoFile(e.target.files[0])}
             />
-            <Upload className="w-5 h-5 text-slate-400 mb-1" />
-            <span className="text-xs font-medium text-slate-700 truncate max-w-[150px]">
+            <Upload className="w-5 h-5 text-slate-400 dark:text-slate-500 mb-1" />
+            <span className="text-xs font-medium text-slate-700 dark:text-slate-300 truncate max-w-[150px]">
               {photoFile ? photoFile.name : 'Choose Photo'}
             </span>
           </label>
         </div>
 
         {/* 2. Signature */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex flex-col justify-between space-y-3">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm flex flex-col justify-between space-y-3">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-slate-900">2. Signature</span>
+              <span className="text-xs font-bold text-slate-900 dark:text-slate-100">2. Signature</span>
               {sigFile && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />}
             </div>
-            <p className="text-[11px] text-slate-500 mt-0.5">
-              Auto-cleans paper shadow, ≤{currentPortal.signatureSpecs?.maxKb || 30}KB
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+              Auto-cleans paper shadow, â‰¤{currentPortal.signatureSpecs?.maxKb || 30}KB
             </p>
           </div>
 
-          <label className="border-2 border-dashed border-slate-200 hover:border-emerald-500 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer bg-slate-50 hover:bg-emerald-50/20 transition-all text-center">
+          <label className="border-2 border-dashed border-slate-200 dark:border-slate-800 hover:border-emerald-500 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer bg-slate-50 dark:bg-slate-950 hover:bg-emerald-50/20 dark:hover:bg-emerald-950/20 transition-all text-center">
             <input
               type="file"
               accept="image/*"
               className="hidden"
               onChange={(e) => e.target.files && setSigFile(e.target.files[0])}
             />
-            <Upload className="w-5 h-5 text-slate-400 mb-1" />
-            <span className="text-xs font-medium text-slate-700 truncate max-w-[150px]">
+            <Upload className="w-5 h-5 text-slate-400 dark:text-slate-500 mb-1" />
+            <span className="text-xs font-medium text-slate-700 dark:text-slate-300 truncate max-w-[150px]">
               {sigFile ? sigFile.name : 'Choose Signature'}
             </span>
           </label>
         </div>
 
         {/* 3. CNIC Front & Back */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex flex-col justify-between space-y-3">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm flex flex-col justify-between space-y-3">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-slate-900">3. CNIC (Front + Back)</span>
+              <span className="text-xs font-bold text-slate-900 dark:text-slate-100">3. CNIC (Front + Back)</span>
               {(cnicFrontFile || cnicBackFile) && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />}
             </div>
-            <p className="text-[11px] text-slate-500 mt-0.5">
-              Auto-merges onto 1 page, ≤{currentPortal.cnicSpecs?.maxKb || 300}KB
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+              Auto-merges onto 1 page, â‰¤{currentPortal.cnicSpecs?.maxKb || 300}KB
             </p>
           </div>
 
           <div className="grid grid-cols-2 gap-2">
-            <label className="border border-dashed border-slate-200 hover:border-emerald-500 rounded-lg p-2 flex flex-col items-center justify-center cursor-pointer bg-slate-50 text-center">
+            <label className="border border-dashed border-slate-200 dark:border-slate-800 hover:border-emerald-500 rounded-lg p-2 flex flex-col items-center justify-center cursor-pointer bg-slate-50 dark:bg-slate-950 text-center">
               <input
                 type="file"
                 accept="image/*"
                 className="hidden"
                 onChange={(e) => e.target.files && setCnicFrontFile(e.target.files[0])}
               />
-              <span className="text-[10px] font-semibold text-slate-700">Front</span>
-              <span className="text-[9px] text-slate-400 truncate max-w-[60px]">
+              <span className="text-[10px] font-semibold text-slate-700 dark:text-slate-300">Front</span>
+              <span className="text-[9px] text-slate-400 dark:text-slate-500 truncate max-w-[60px]">
                 {cnicFrontFile ? 'Uploaded' : '+ Add'}
               </span>
             </label>
 
-            <label className="border border-dashed border-slate-200 hover:border-emerald-500 rounded-lg p-2 flex flex-col items-center justify-center cursor-pointer bg-slate-50 text-center">
+            <label className="border border-dashed border-slate-200 dark:border-slate-800 hover:border-emerald-500 rounded-lg p-2 flex flex-col items-center justify-center cursor-pointer bg-slate-50 dark:bg-slate-950 text-center">
               <input
                 type="file"
                 accept="image/*"
                 className="hidden"
                 onChange={(e) => e.target.files && setCnicBackFile(e.target.files[0])}
               />
-              <span className="text-[10px] font-semibold text-slate-700">Back</span>
-              <span className="text-[9px] text-slate-400 truncate max-w-[60px]">
+              <span className="text-[10px] font-semibold text-slate-700 dark:text-slate-300">Back</span>
+              <span className="text-[9px] text-slate-400 dark:text-slate-500 truncate max-w-[60px]">
                 {cnicBackFile ? 'Uploaded' : '+ Add'}
               </span>
             </label>
@@ -269,26 +269,26 @@ export const JobBundlePack: React.FC<JobBundlePackProps> = ({
         </div>
 
         {/* 4. Degree or Bank Challan */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex flex-col justify-between space-y-3">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm flex flex-col justify-between space-y-3">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-slate-900">4. Degree / Challan</span>
+              <span className="text-xs font-bold text-slate-900 dark:text-slate-100">4. Degree / Challan</span>
               {degreeFile && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />}
             </div>
-            <p className="text-[11px] text-slate-500 mt-0.5">
-              Degree or e-Pay challan receipt, ≤{currentPortal.documentSpecs?.maxKb || 300}KB
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+              Degree or e-Pay challan receipt, â‰¤{currentPortal.documentSpecs?.maxKb || 300}KB
             </p>
           </div>
 
-          <label className="border-2 border-dashed border-slate-200 hover:border-emerald-500 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer bg-slate-50 hover:bg-emerald-50/20 transition-all text-center">
+          <label className="border-2 border-dashed border-slate-200 dark:border-slate-800 hover:border-emerald-500 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer bg-slate-50 dark:bg-slate-950 hover:bg-emerald-50/20 dark:hover:bg-emerald-950/20 transition-all text-center">
             <input
               type="file"
               accept="image/*"
               className="hidden"
               onChange={(e) => e.target.files && setDegreeFile(e.target.files[0])}
             />
-            <Upload className="w-5 h-5 text-slate-400 mb-1" />
-            <span className="text-xs font-medium text-slate-700 truncate max-w-[150px]">
+            <Upload className="w-5 h-5 text-slate-400 dark:text-slate-500 mb-1" />
+            <span className="text-xs font-medium text-slate-700 dark:text-slate-300 truncate max-w-[150px]">
               {degreeFile ? degreeFile.name : 'Choose Degree/Challan'}
             </span>
           </label>
@@ -296,8 +296,8 @@ export const JobBundlePack: React.FC<JobBundlePackProps> = ({
       </div>
 
       {errorMsg && (
-        <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-800 flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
+        <div className="p-3 bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-xl text-xs text-red-800 dark:text-red-300 flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 text-red-600 dark:text-red-400 shrink-0" />
           <span>{errorMsg}</span>
         </div>
       )}
@@ -326,16 +326,16 @@ export const JobBundlePack: React.FC<JobBundlePackProps> = ({
 
       {/* Processed Results List & ZIP Download */}
       {processedItems.length > 0 && (
-        <div className="bg-white border-2 border-emerald-500/50 rounded-2xl p-5 shadow-sm space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+        <div className="bg-white dark:bg-slate-900 border-2 border-emerald-500/50 rounded-2xl p-5 shadow-sm space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
             <div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                <h3 className="text-sm font-bold text-slate-900">
+                <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">
                   {currentPortal.shortName} Application Kit Ready ({processedItems.length} files)
                 </h3>
               </div>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Every file passed the commission's size, dimension, and 200 DPI standards.
               </p>
             </div>
@@ -347,7 +347,7 @@ export const JobBundlePack: React.FC<JobBundlePackProps> = ({
                 className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold text-xs py-2.5 px-4 rounded-xl shadow-md transition-colors cursor-pointer"
               >
                 <Crown className="w-4 h-4 fill-slate-950" />
-                <span>Limit Reached (3/3) · Buy Premium to Download ZIP</span>
+                <span>Limit Reached (3/3) Â· Buy Premium to Download ZIP</span>
               </button>
             ) : (
               <button
@@ -366,18 +366,18 @@ export const JobBundlePack: React.FC<JobBundlePackProps> = ({
             {processedItems.map((item) => (
               <div
                 key={item.id}
-                className="bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col justify-between space-y-3"
+                className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 flex flex-col justify-between space-y-3"
               >
                 <div>
-                  <div className="text-xs font-bold text-slate-900 truncate" title={item.name}>
+                  <div className="text-xs font-bold text-slate-900 dark:text-slate-100 truncate" title={item.name}>
                     {item.name}
                   </div>
-                  <div className="text-[11px] font-mono text-emerald-700 font-semibold mt-0.5">
-                    {item.result.fileSizeKb} KB · {item.result.width}×{item.result.height} px
+                  <div className="text-[11px] font-mono text-emerald-700 dark:text-emerald-300 font-semibold mt-0.5">
+                    {item.result.fileSizeKb} KB Â· {item.result.width}Ã—{item.result.height} px
                   </div>
                 </div>
 
-                <div className="h-32 bg-white rounded-lg border border-slate-200 flex items-center justify-center overflow-hidden p-1">
+                <div className="h-32 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 flex items-center justify-center overflow-hidden p-1">
                   <img
                     src={item.result.dataUrl}
                     alt={item.name}
@@ -388,7 +388,7 @@ export const JobBundlePack: React.FC<JobBundlePackProps> = ({
                 <a
                   href={item.result.dataUrl}
                   download={item.fileName}
-                  className="py-1.5 px-3 bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 text-xs font-semibold rounded-lg text-center transition-colors flex items-center justify-center gap-1.5"
+                  className="py-1.5 px-3 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800 text-xs font-semibold rounded-lg text-center transition-colors flex items-center justify-center gap-1.5"
                 >
                   <Download className="w-3.5 h-3.5 text-emerald-600" />
                   <span>Download File</span>

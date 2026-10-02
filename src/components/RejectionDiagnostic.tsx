@@ -51,7 +51,7 @@ const COMMON_ERRORS: CommonRejectionError[] = [
     portalName: 'FPSC, NTS, CSS',
     errorMessage: 'Only one file upload allowed for CNIC. Please provide combined front & back.',
     cause: 'The application portal provides only a single upload button, but requires both front and back sides to verify applicant identity.',
-    solution: 'Use DocFix’s CNIC Combiner tool to merge front and back sides into a single vertical card layout under 300KB.',
+    solution: 'Use DocFixâ€™s CNIC Combiner tool to merge front and back sides into a single vertical card layout under 300KB.',
     fixActionLabel: 'Open CNIC Combiner Tool'
   },
   {
@@ -60,7 +60,7 @@ const COMMON_ERRORS: CommonRejectionError[] = [
     portalName: 'FPSC, SPSC, KPPSC',
     errorMessage: 'Signature is illegible or has unreadable dark background.',
     cause: 'Taking a smartphone photo of a signature in room light creates paper shadows and yellow tint, triggering automated OCR failure.',
-    solution: 'DocFix’s Signature B&W threshold filter removes paper yellowing and harsh shadows, creating a pure white background with bold pen strokes.',
+    solution: 'DocFixâ€™s Signature B&W threshold filter removes paper yellowing and harsh shadows, creating a pure white background with bold pen strokes.',
     fixActionLabel: 'Auto-Fix with Signature Filter'
   },
   {
@@ -81,18 +81,18 @@ export const RejectionDiagnostic: React.FC<RejectionDiagnosticProps> = ({ portal
   const targetPortal = portals.find(p => p.id === activeError.portalId) || portals[0];
 
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
       <div>
         <div className="flex items-center gap-2">
           <Wrench className="w-5 h-5 text-emerald-600" />
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
             Automated Troubleshooting Engine
           </span>
         </div>
-        <h2 className="text-xl font-bold text-slate-900 mt-1">
+        <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 mt-1">
           Government Portal Rejection Diagnostic &amp; Instant Fixer
         </h2>
-        <p className="text-xs text-slate-600 mt-1 max-w-3xl">
+        <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 max-w-3xl">
           Did your photo or document get rejected by FPSC, PPSC, NTS, or an admission portal? Select the error message below to understand why it failed and apply the exact 1-click correction.
         </p>
       </div>
@@ -100,7 +100,7 @@ export const RejectionDiagnostic: React.FC<RejectionDiagnosticProps> = ({ portal
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Error Selection List (5 cols) */}
         <div className="lg:col-span-5 space-y-2">
-          <label className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-2">
+          <label className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-2">
             Select The Error You Received:
           </label>
 
@@ -113,11 +113,11 @@ export const RejectionDiagnostic: React.FC<RejectionDiagnosticProps> = ({ portal
                 onClick={() => setSelectedErrorId(err.id)}
                 className={`w-full text-left p-3 rounded-xl border transition-all text-xs ${
                   isSelected
-                    ? 'border-emerald-600 bg-emerald-50/70 text-emerald-950 font-bold shadow-xs'
-                    : 'border-slate-200 bg-slate-50/60 text-slate-700 hover:bg-slate-100'
+                    ? 'border-emerald-600 bg-emerald-50/70 dark:bg-emerald-950/70 text-emerald-950 dark:text-emerald-100 font-bold shadow-xs'
+                    : 'border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-950/60 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900'
                 }`}
               >
-                <div className="font-mono text-[10px] text-slate-400 uppercase">
+                <div className="font-mono text-[10px] text-slate-400 dark:text-slate-500 uppercase">
                   {err.portalName}
                 </div>
                 <div className="mt-1 font-semibold leading-snug line-clamp-1">
@@ -129,10 +129,10 @@ export const RejectionDiagnostic: React.FC<RejectionDiagnosticProps> = ({ portal
         </div>
 
         {/* Diagnosis & 1-Click Fix Solution (7 cols) */}
-        <div className="lg:col-span-7 bg-slate-50 border border-slate-200 rounded-2xl p-5 sm:p-6 space-y-4 flex flex-col justify-between">
+        <div className="lg:col-span-7 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 space-y-4 flex flex-col justify-between">
           <div className="space-y-4">
-            <div className="flex items-start gap-3 bg-red-50 border border-red-200 rounded-xl p-3.5 text-xs text-red-900">
-              <AlertTriangle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+            <div className="flex items-start gap-3 bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-xl p-3.5 text-xs text-red-900 dark:text-red-200">
+              <AlertTriangle className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
               <div>
                 <strong className="block font-bold mb-0.5">Rejected Error Message:</strong>
                 <span className="font-mono text-[11px]">"{activeError.errorMessage}"</span>
@@ -140,27 +140,27 @@ export const RejectionDiagnostic: React.FC<RejectionDiagnosticProps> = ({ portal
             </div>
 
             <div className="space-y-1.5 text-xs">
-              <span className="font-bold uppercase tracking-wider text-slate-500 text-[10px]">
+              <span className="font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-[10px]">
                 Why The Commission Server Rejected It:
               </span>
-              <p className="text-slate-700 leading-relaxed">
+              <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
                 {activeError.cause}
               </p>
             </div>
 
-            <div className="space-y-1.5 text-xs pt-2 border-t border-slate-200">
-              <span className="font-bold uppercase tracking-wider text-emerald-800 text-[10px]">
+            <div className="space-y-1.5 text-xs pt-2 border-t border-slate-200 dark:border-slate-800">
+              <span className="font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 text-[10px]">
                 The DocFix Guaranteed Fix:
               </span>
-              <p className="text-slate-700 leading-relaxed">
+              <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
                 {activeError.solution}
               </p>
             </div>
           </div>
 
-          <div className="pt-3 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div className="text-[11px] text-slate-500 font-medium">
-              Target: <strong className="text-slate-800">{targetPortal.name}</strong>
+          <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+              Target: <strong className="text-slate-800 dark:text-slate-200">{targetPortal.name}</strong>
             </div>
 
             <button

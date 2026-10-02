@@ -3,6 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="monetag" content="7863923830f81aebe4c39ebfe0327188">
+    <!--
+      Applies the stored theme before first paint so dark-mode reloads do not
+      flash light. Must stay in sync with THEME_BOOTSTRAP_SCRIPT in src/utils/theme.ts.
+    -->
+    <script>
+      (function () {
+        try {
+          var p = localStorage.getItem('docfix-theme');
+          if (p !== 'light' && p !== 'dark' && p !== 'system') p = 'system';
+          var d = p === 'dark' || (p === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          var r = document.documentElement;
+          r.classList.toggle('dark', d);
+          r.style.colorScheme = d ? 'dark' : 'light';
+        } catch (e) {}
+      })();
+    </script>
     <title>DocFix - Government Job Document & Photo Resizer (300KB)</title>
     <meta name="description" content="All-in-one document and photo resizer for FPSC, PPSC, NTS, NJP, and admissions. Auto-converts to JPG, exact dimensions, target KB compression, 200 DPI, and CNIC front+back PDF merger." />
     <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -89,7 +107,8 @@
     }
     </script>
   </head>
-  <body class="bg-slate-50 text-slate-900 antialiased font-['Plus_Jakarta_Sans',sans-serif] selection:bg-emerald-500 selection:text-white">
+  <!-- Background/text colour is owned by src/index.css so the dark base layer can win; do not add colour utilities here. -->
+  <body class="antialiased font-['Plus_Jakarta_Sans',sans-serif] selection:bg-emerald-500 selection:text-white">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

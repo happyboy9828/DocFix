@@ -3,34 +3,34 @@ import { Shield, Lock, Eye, FileText, CheckCircle2 } from 'lucide-react';
 
 export const PrivacyPolicy: React.FC = () => {
   return (
-    <div className="max-w-4xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 shadow-sm space-y-8 text-slate-700 leading-relaxed text-sm">
-      <div className="border-b border-slate-200 pb-5">
-        <div className="flex items-center gap-2 text-xs font-bold text-emerald-700 uppercase tracking-wider mb-1">
+    <div className="max-w-4xl mx-auto bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-10 shadow-sm space-y-8 text-slate-700 dark:text-slate-300 leading-relaxed text-sm">
+      <div className="border-b border-slate-200 dark:border-slate-800 pb-5">
+        <div className="flex items-center gap-2 text-xs font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wider mb-1">
           <Shield className="w-4 h-4" />
           <span>Official Trust &amp; Privacy Document</span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100">
           Privacy Policy
         </h1>
-        <p className="text-xs text-slate-500 mt-1">
-          Last Updated: March 2026 · Compliant with Google AdSense, GDPR, CCPA &amp; ePrivacy Regulations
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+          Last Updated: March 2026 Â· Compliant with Google AdSense, GDPR, CCPA &amp; ePrivacy Regulations
         </p>
       </div>
 
       {/* Highlights Box */}
-      <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-xs text-emerald-950 space-y-2">
-        <div className="font-bold flex items-center gap-1.5 text-emerald-800 text-sm">
+      <div className="bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 rounded-xl p-4 text-xs text-emerald-950 dark:text-emerald-100 space-y-2">
+        <div className="font-bold flex items-center gap-1.5 text-emerald-800 dark:text-emerald-300 text-sm">
           <CheckCircle2 className="w-4 h-4 text-emerald-600" />
           <span>Zero Server Upload Guarantee for Documents &amp; Photos</span>
         </div>
         <p>
-          At DocFix (accessible from <code className="font-mono bg-white px-1 py-0.5 rounded border border-emerald-200">http://0.0.0.0:3000</code>), the privacy of our visitors is of paramount importance. <strong>Your uploaded photographs, National Identity Cards (CNIC), signatures, and academic certificates are NEVER transferred to, processed on, or stored on our servers.</strong> All conversions, dimensions resizing, DPI injection, and PDF compiling happen entirely inside your local web browser using client-side HTML5 Canvas and WebAssembly.
+          At DocFix (accessible from <code className="font-mono bg-white dark:bg-slate-900 px-1 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">http://0.0.0.0:3000</code>), the privacy of our visitors is of paramount importance. <strong>Your uploaded photographs, National Identity Cards (CNIC), signatures, and academic certificates are NEVER transferred to, processed on, or stored on our servers.</strong> All conversions, dimensions resizing, DPI injection, and PDF compiling happen entirely inside your local web browser using client-side HTML5 Canvas and WebAssembly.
         </p>
       </div>
 
       {/* Section 1 */}
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+        <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
           <span>1. Document &amp; Image Processing Privacy</span>
         </h2>
         <p>
@@ -46,7 +46,7 @@ export const PrivacyPolicy: React.FC = () => {
 
       {/* Section 2 */}
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-slate-900">
+        <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">
           2. Log Files &amp; Standard Web Analytics
         </h2>
         <p>
@@ -59,33 +59,33 @@ export const PrivacyPolicy: React.FC = () => {
           <li>Date, timestamp, and referring/exit pages</li>
           <li>Number of clicks to analyze trends and administer the site</li>
         </ul>
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-slate-500 dark:text-slate-400">
           This data is not linked to any information that is personally identifiable and is used solely for performance monitoring and DDoS mitigation.
         </p>
       </section>
 
       {/* Section 3 */}
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-slate-900">
+        <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">
           3. Cookies, Web Beacons &amp; Third-Party Advertising Partners
         </h2>
         <p>
           DocFix uses cookies to store information about visitors' preferences and optimize user experience (such as remembering your selected portal preset).
         </p>
-        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2 text-xs">
-          <h3 className="font-bold text-slate-900">Google AdSense &amp; Advertising Networks</h3>
+        <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-4 space-y-2 text-xs">
+          <h3 className="font-bold text-slate-900 dark:text-slate-100">Google AdSense &amp; Advertising Networks</h3>
           <p>
             Third-party advertising vendors, including Google, use cookies to serve ads based on a user's prior visits to DocFix or other websites:
           </p>
-          <ul className="list-disc pl-5 space-y-1 text-slate-600">
+          <ul className="list-disc pl-5 space-y-1 text-slate-600 dark:text-slate-400">
             <li>
               <strong>Google DART Cookie:</strong> Google's use of advertising cookies enables it and its partners to serve ads to our users based on their visit to our sites and/or other sites on the Internet.
             </li>
             <li>
-              Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-emerald-700 underline font-semibold">Google Ads Settings</a>.
+              Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-emerald-700 dark:text-emerald-300 underline font-semibold">Google Ads Settings</a>.
             </li>
             <li>
-              Alternatively, you can opt out of a third-party vendor's use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info" target="_blank" rel="noopener noreferrer" className="text-emerald-700 underline font-semibold">aboutads.info</a> or <a href="https://www.youronlinechoices.com" target="_blank" rel="noopener noreferrer" className="text-emerald-700 underline font-semibold">Your Online Choices</a>.
+              Alternatively, you can opt out of a third-party vendor's use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info" target="_blank" rel="noopener noreferrer" className="text-emerald-700 dark:text-emerald-300 underline font-semibold">aboutads.info</a> or <a href="https://www.youronlinechoices.com" target="_blank" rel="noopener noreferrer" className="text-emerald-700 dark:text-emerald-300 underline font-semibold">Your Online Choices</a>.
             </li>
           </ul>
         </div>
@@ -93,7 +93,7 @@ export const PrivacyPolicy: React.FC = () => {
 
       {/* Section 4 */}
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-slate-900">
+        <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">
           4. CCPA Privacy Rights (Do Not Sell My Personal Information)
         </h2>
         <p>
@@ -103,7 +103,7 @@ export const PrivacyPolicy: React.FC = () => {
 
       {/* Section 5 */}
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-slate-900">
+        <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">
           5. GDPR Data Protection Rights
         </h2>
         <p>
@@ -118,14 +118,14 @@ export const PrivacyPolicy: React.FC = () => {
 
       {/* Section 6 */}
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-slate-900">
+        <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">
           6. Contacting the Privacy Officer
         </h2>
         <p>
           If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact our compliance team:
         </p>
-        <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-xs text-slate-700 font-mono">
-          Email: <span className="font-bold text-emerald-800">privacy@docfix.pk</span> · Response turnaround: Within 24-48 business hours.
+        <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3.5 text-xs text-slate-700 dark:text-slate-300 font-mono">
+          Email: <span className="font-bold text-emerald-800 dark:text-emerald-300">privacy@docfix.pk</span> Â· Response turnaround: Within 24-48 business hours.
         </div>
       </section>
     </div>
