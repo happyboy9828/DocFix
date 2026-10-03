@@ -1,42 +1,54 @@
-# Task: Change Payment Flow — Bank / Wallet Dropdown + Account Number Verification
+# Task: Microsoft Clarity + Confidential Secrets Handling
 
 ## Goal
-Rework the payment step of `PremiumModal.tsx`. When a user clicks a plan:
+Add `@microsoft/clarity` to the project and establish a proper `.env` setup for
+confidential secrets.
 
-- **Removed** the "Pay via EasyPaisa / JazzCash / Raast" header, the hardcoded
-  `0300-1234567` number, and the "Send Rs. X to Title: DocFix Official" instruction line.
-- **Removed** the free-text "Bank Details" field.
-- **Added** a **Bank or Mobile Wallet** dropdown listing Pakistani banks and mobile wallets,
-  grouped into two `<optgroup>`s.
-- Kept the **Account Number** input and the **Check Payment Details** button, which
-  validates the account number against the selected source type.
+## Changes
 
-## In scope
-`src/components/PremiumModal.tsx` only — payment step (`step === 'payment'`):
+### Dependency
+- `npm install @microsoft/clarity` → `^1.0.2` in `dependencies`
 
-- `PaymentSource` type (`id`, `label`, `type: 'bank' | 'wallet'`)
-- `BANKS` — 29 Pakistani banks
-- `MOBILE_WALLETS` — EasyPaisa, JazzCash, SadaPay, NPay, InstaPay, Raast, Zong, Jazz,
-  Ufone, Warid
-- `PAYMENT_SOURCES` — concatenated lookup list
-- `findPaymentSource()` — resolves an id to its source
-- `validatePaymentDetails()` — now validates `{ accountNumber, sourceId }`:
-  - a source must be selected
-  - digits only
-  - **wallet** → must match `/^03\d{9}$/` (11 digits starting 03)
-  - **bank** → 10–17 digits
-- Label, placeholder, and helper copy all switch to "Mobile Wallet Number" when a wallet is
-  selected
-- Dropdown uses `appearance-none` + `ChevronDown` to match the input styling
-- Modal subtitle no longer mentions paying or the cheat code
+### New file — `src/utils/clarity.ts`
+Thin wrapper around the Clarity SDK:
+- `PROJECT_ID` read from `import.meta.env.VITE_CLARITY_PROJECT_ID`
+- **Consent-gated**: does not initialise until `localStorage['docfix_cookie_consent']` is
+  `'accepted'`, so no session recording happens before the visitor opts in
+- `initClarity()` — guarded init, no-ops when the project ID is blank
+- `syncClarityConsent()` — called by `CookieBanner` after accept/decline; downgrades to
+  `Clarity.consentV2({ denied, denied })` if the visitor has already initialised and then
+  declines
+- `trackEvent(name)` / `trackTag(key, value)` — safe helpers, wrapped in try/catch so
+  analytics can never throw into the app
+- `isClarityEnabled()` — whether a project ID is configured
 
-## Out of scope
-- `src/utils/limitEngine.ts`, `src/components/DailyLimitBadge.tsx`, `Navbar.tsx`,
-  `SingleDocResizer.tsx`, `CnicCombiner.tsx`, `JobBundlePack.tsx`, and page prop plumbing
-- Plans, feature list, cheat-code activation (`UnlockForm`), cancel flow
-- Ad monetization (`AdSlot`, Monetag), dark mode, backend routes
-- `App.tsx` catch-all route fix from the previous turn (already applied)
+### `src/main.tsx`
+Calls `initClarity()` before `createRoot(...).render(...)`.
+
+### `src/components/CookieBanner.tsx`
+Calls `syncClarityConsent()` in both `handleAccept` and `handleDecline`.
+
+### Env files
+- `.env` (gitignored) — local dev secrets, Clarity ID left blank for the user to fill
+- `.env.example` (committed) — fully documented template that explains the
+  `VITE_`-prefix rule
+
+## The VITE_ prefix rule
+Vite inlines **only** `VITE_`-prefixed variables into the client bundle at build time, and
+it does so by substituting the literal value. So:
+- `VITE_*` = **public**. Fine for a Clarity project ID or a publishable key. Rotating the
+  var does not revoke an already-deployed value.
+- No prefix = **server-only**, read via `process.env` in `server.ts`. Use for real secrets.
+
+This is stated explicitly in both env files and in the header comment of
+`src/utils/clarity.ts`, because a Clarity project ID being called a "secret" is the exact
+trap that leads to real API keys being pasted into `VITE_`-prefixed variables.
 
 ## Verification
-- `npm run lint` (`tsc --noEmit`) — passing
+- `npm run lint` — passing
 - `npm run build` — passing
+- Confirmed `www.clarity.ms/tag/` + project ID injector appears in `dist/assets/*.js` when
+  a project ID is set, and is **tree-shaken out entirely** when the ID is blank (zero
+  Clarity bytes shipped). `.env` was restored to blank afterwards.
+- Confirmed `git check-ignore` reports `.env` is ignored by `.gitignore:7` (`.env*`) and
+  `.env.example` is not ignored

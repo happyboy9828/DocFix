@@ -58,6 +58,30 @@ number, the "Send Rs. X to Title: DocFix Official" instruction, and the free-tex
 **Not changed:** plans, feature list, cheat-code activation, cancel flow, `limitEngine`,
 `DailyLimitBadge`, and all paywall gates in the tool components.
 
+### Phase 6 — Microsoft Clarity + secrets handling (current)
+`@microsoft/clarity@^1.0.2` installed and wired through a consent-gated wrapper.
+
+- `src/utils/clarity.ts` — reads `VITE_CLARITY_PROJECT_ID`, refuses to initialise until
+  `localStorage['docfix_cookie_consent'] === 'accepted'`, exposes `initClarity()`,
+  `syncClarityConsent()`, `trackEvent()`, `trackTag()`, `isClarityEnabled()`
+- `src/main.tsx` — calls `initClarity()` before render
+- `src/components/CookieBanner.tsx` — calls `syncClarityConsent()` on accept and decline
+- No script tag in `index.html`; the SDK injects `https://www.clarity.ms/tag/<id>` itself
+
+When `VITE_CLARITY_PROJECT_ID` is blank the whole module constant-folds away and **zero**
+Clarity bytes are shipped. Confirmed by inspecting `dist/assets/*.js` both ways.
+
+### Environment / secrets
+- `.env` — local, gitignored via `.gitignore:7` (`.env*`)
+- `.env.example` — committed template, documents the `VITE_` rule
+- **Rule:** Vite inlines only `VITE_`-prefixed vars into the client bundle, substituting the
+  literal value at build time. `VITE_*` is therefore **public** (Clarity project ID,
+  publishable keys). Unprefixed vars stay server-side via `process.env` and are the only
+  correct home for real secrets (`GEMINI_API_KEY`, future Monetag/webhook keys).
+- `dotenv` is still declared in `package.json` but never imported — the Express server does
+  not currently load `.env`. Any new server-only var needs `import 'dotenv/config'` (or
+  Node's `--env-file`) added first.
+
 ## Known Issues
 - `PremiumModal` leaks a working unlock code in its error message and has a frictionless
   "Instant Demo Pass" button — premium is not actually protected.
@@ -67,6 +91,10 @@ number, the "Send Rs. X to Title: DocFix Official" instruction, and the free-tex
   Nothing is transmitted to the server and there is no record of any payment.
 - `Terms of Service` has no pricing, subscription, renewal, cancellation, or refund section.
 - `index.html` JSON-LD declares `price: "0"`, contradicting the paid plans.
+- Microsoft Clarity records **keystrokes and DOM content**. DocFix uploads ID photos and
+  CNICs, so recordings may capture personal data. `PrivacyPolicy.tsx` still describes only
+  AdSense/DART and has not been updated to disclose Clarity — this should be fixed before
+  enabling it in production.
 - Dead code: unused `AdSlot` import in `App.tsx`, unused `docfix_adsense_pub_id` state in
   `AdSlot.tsx`, `dotenv` declared in `package.json` but never imported.
 
