@@ -7,26 +7,34 @@ import { apiRouter } from './server/routes/api';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const TAB_TO_PATH: Record<string, string> = {
+  cnic: '/cnic',
+  bundle: '/bundle',
+  diagnostic: '/diagnostic',
+  directory: '/portal-specs',
+  guidelines: '/guidelines',
+  faq: '/faq',
+  privacy: '/privacy',
+  terms: '/terms',
+  disclaimer: '/disclaimer',
+  about: '/about',
+  contact: '/contact'
+};
+
 async function startServer() {
   const app = express();
   const PORT = Number(process.env.PORT) || 3000;
 
-  // Body parsers
   app.use(express.json({ limit: '50mb' }));
   app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-  // API router
   app.use('/api', apiRouter);
 
-  // Standard Ad Network & Search Engine verification endpoints (Mandatory for AdSense, Monetag, Adsterra)
   app.get('/ads.txt', (req, res) => {
     res.type('text/plain');
     res.send(`# DocFix Ads.txt File - Ad Network Verification
-# Replace pub-XXXXXXXXXXXXXXXX with your real Google AdSense Publisher ID
 google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
-# Monetag Publisher ID Placeholder
 # monetag.com, XXXXXX, DIRECT
-# Adsterra Publisher ID Placeholder
 # adsterra.com, XXXXXX, DIRECT
 `);
   });
@@ -61,61 +69,67 @@ Sitemap: ${baseUrl}/sitemap.xml
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>${baseUrl}/?tab=cnic</loc>
+    <loc>${baseUrl}/cnic</loc>
     <lastmod>${now}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>${baseUrl}/?tab=bundle</loc>
+    <loc>${baseUrl}/bundle</loc>
     <lastmod>${now}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>${baseUrl}/?tab=diagnostic</loc>
+    <loc>${baseUrl}/diagnostic</loc>
     <lastmod>${now}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>${baseUrl}/?tab=directory</loc>
+    <loc>${baseUrl}/portal-specs</loc>
     <lastmod>${now}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>${baseUrl}/?tab=guidelines</loc>
+    <loc>${baseUrl}/guidelines</loc>
     <lastmod>${now}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>${baseUrl}/?tab=privacy</loc>
+    <loc>${baseUrl}/faq</loc>
+    <lastmod>${now}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/privacy</loc>
     <lastmod>${now}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>${baseUrl}/?tab=terms</loc>
+    <loc>${baseUrl}/terms</loc>
     <lastmod>${now}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>${baseUrl}/?tab=disclaimer</loc>
+    <loc>${baseUrl}/disclaimer</loc>
     <lastmod>${now}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>${baseUrl}/?tab=about</loc>
+    <loc>${baseUrl}/about</loc>
     <lastmod>${now}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>${baseUrl}/?tab=contact</loc>
+    <loc>${baseUrl}/contact</loc>
     <lastmod>${now}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -124,7 +138,17 @@ Sitemap: ${baseUrl}/sitemap.xml
 `);
   });
 
-  // Vite dev server or static dist
+  app.get('/', (req, res) => {
+    const tab = req.query.tab as string | undefined;
+    if (tab && TAB_TO_PATH[tab]) {
+      return res.redirect(301, TAB_TO_PATH[tab]);
+    }
+    if (process.env.NODE_ENV === 'production') {
+      return res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+    }
+    res.status(200).end();
+  });
+
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.resolve(__dirname, 'dist')));
     app.get('*', (req, res) => {

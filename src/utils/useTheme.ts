@@ -12,10 +12,7 @@ interface ThemeController {
   preference: ThemePreference;
   resolved: ResolvedTheme;
   setPreference: (preference: ThemePreference) => void;
-  cycle: () => void;
 }
-
-const ORDER: ThemePreference[] = ['light', 'dark', 'system'];
 
 /**
  * Owns the active theme. The <html> class is written on mount from the stored
@@ -43,13 +40,5 @@ export const useTheme = (): ThemeController => {
     setPreferenceState(next);
   }, []);
 
-  const cycle = useCallback(() => {
-    setPreferenceState((current) => {
-      const next = ORDER[(ORDER.indexOf(current) + 1) % ORDER.length];
-      writeStoredPreference(next);
-      return next;
-    });
-  }, []);
-
-  return { preference, resolved, setPreference, cycle };
+  return { preference, resolved, setPreference };
 };

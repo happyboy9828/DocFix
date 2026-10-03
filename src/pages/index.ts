@@ -1,0 +1,12 @@
+export { HomePage } from './HomePage';
+export { CnicPage } from './CnicPage';
+export { BundlePage } from './BundlePage';
+export { DiagnosticPage } from './DiagnosticPage';
+export { DirectoryPage } from './DirectoryPage';
+export { GuidelinesPage } from './GuidelinesPage';
+export { FaqPage } from './FaqPage';
+export { PrivacyPage } from './PrivacyPage';
+export { TermsPage } from './TermsPage';
+export { DisclaimerPage } from './DisclaimerPage';
+export { AboutPage } from './AboutPage';
+export { ContactPage } from './ContactPage';

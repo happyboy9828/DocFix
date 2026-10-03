@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   FileCheck,
   Layers,
@@ -9,7 +9,9 @@ import {
   Crown,
   Sun,
   Moon,
-  Monitor
+  Monitor,
+  ChevronDown,
+  Check
 } from 'lucide-react';
 import { UsageState } from '../utils/limitEngine';
 import { ThemePreference } from '../utils/theme';
@@ -34,34 +36,98 @@ interface NavbarProps {
   usage: UsageState;
   onOpenPremium: () => void;
   themePreference: ThemePreference;
-  onCycleTheme: () => void;
+  onThemeChange: (preference: ThemePreference) => void;
 }
+
+const THEME_OPTIONS: ThemePreference[] = ['light', 'dark', 'system'];
 
 const THEME_META: Record<
   ThemePreference,
   { label: string; Icon: typeof Sun; hint: string }
 > = {
-  light: { label: 'Light', Icon: Sun, hint: 'Switch to dark theme' },
-  dark: { label: 'Dark', Icon: Moon, hint: 'Follow system theme' },
-  system: { label: 'System', Icon: Monitor, hint: 'Switch to light theme' }
+  light: { label: 'Light', Icon: Sun, hint: 'Always use the light theme' },
+  dark: { label: 'Dark', Icon: Moon, hint: 'Always use the dark theme' },
+  system: { label: 'System', Icon: Monitor, hint: 'Follow your device setting' }
 };
 
-const ThemeToggle: React.FC<{
+const ThemeSelect: React.FC<{
   preference: ThemePreference;
-  onCycle: () => void;
-}> = ({ preference, onCycle }) => {
+  onChange: (preference: ThemePreference) => void;
+}> = ({ preference, onChange }) => {
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const { label, Icon, hint } = THEME_META[preference];
+
+  useEffect(() => {
+    if (!open) return;
+    const onPointerDown = (event: MouseEvent) => {
+      if (!containerRef.current?.contains(event.target as Node)) setOpen(false);
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('mousedown', onPointerDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [open]);
+
+  const choose = (next: ThemePreference) => {
+    onChange(next);
+    setOpen(false);
+  };
+
   return (
-    <button
-      type="button"
-      onClick={onCycle}
-      className="flex items-center gap-1.5 text-xs font-medium px-2 sm:px-2.5 py-1.5 sm:py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"
-      title={hint}
-      aria-label={`Theme: ${label}. ${hint}`}
-    >
-      <Icon className="w-4 h-4 shrink-0" />
-      <span className="hidden xl:inline">{label}</span>
-    </button>
+    <div ref={containerRef} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        className="flex items-center gap-1.5 text-xs font-medium px-2 sm:px-2.5 py-1.5 sm:py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"
+        title={hint}
+        aria-label={`Theme: ${label}`}
+      >
+        <Icon className="w-4 h-4 shrink-0" />
+        <span className="hidden xl:inline">{label}</span>
+        <ChevronDown className={`w-3.5 h-3.5 shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
+      </button>
+
+      {open && (
+        <ul
+          role="listbox"
+          aria-label="Theme"
+          className="absolute right-0 top-full mt-1.5 z-50 w-40 py-1 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-lg overflow-hidden"
+        >
+          {THEME_OPTIONS.map((option) => {
+            const optionMeta = THEME_META[option];
+            const selected = option === preference;
+            const OptionIcon = optionMeta.Icon;
+            return (
+              <li key={option} role="none">
+                <button
+                  type="button"
+                  role="option"
+                  aria-selected={selected}
+                  onClick={() => choose(option)}
+                  className={`w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-left transition-colors cursor-pointer ${
+                    selected
+                      ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300'
+                      : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700'
+                  }`}
+                >
+                  <OptionIcon className="w-4 h-4 shrink-0" />
+                  <span className="flex-1">{optionMeta.label}</span>
+                  {selected && <Check className="w-3.5 h-3.5 shrink-0" />}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
   );
 };
 
@@ -71,7 +137,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   usage,
   onOpenPremium,
   themePreference,
-  onCycleTheme
+  onThemeChange
 }) => {
   return (
     <header className="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-800">
@@ -85,12 +151,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">DocFix</span>
-                <span className="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/60">
-                  Govt Job 300KB
-                </span>
+                
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">
-                FPSC Â· PPSC Â· NTS Â· NJP Â· 200 DPI Auto-Engine
+                 Auto-Engine
               </p>
             </div>
           </div>
@@ -172,20 +236,11 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Right Action: Daily Limit Indicator & Buy Premium Button */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Appearance toggle: light -> dark -> system */}
-            <ThemeToggle preference={themePreference} onCycle={onCycleTheme} />
+            {/* Appearance dropdown: light / dark / system */}
+            <ThemeSelect preference={themePreference} onChange={onThemeChange} />
 
-            {/* Daily limit badge */}
-            {usage.isPremium ? (
-              <button
-                type="button"
-                onClick={onOpenPremium}
-                className="hidden sm:flex items-center gap-1.5 text-xs font-bold text-amber-900 dark:text-amber-200 bg-amber-100 dark:bg-amber-900 border border-amber-300 dark:border-amber-700 px-2.5 py-1.5 rounded-lg shadow-xs"
-              >
-                <Crown className="w-3.5 h-3.5 text-amber-600 fill-amber-500" />
-                <span>DocFix Pro</span>
-              </button>
-            ) : (
+            {/* Daily limit badge (free tier only) */}
+            {!usage.isPremium && (
               <button
                 type="button"
                 onClick={onOpenPremium}
@@ -199,14 +254,19 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
             )}
 
-            {/* Buy Premium Button */}
+            {/* Buy Premium / Pro status Button */}
             <button
               type="button"
               onClick={onOpenPremium}
-              className="flex items-center gap-1.5 text-xs font-extrabold px-3 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 shadow-sm transition-all cursor-pointer ring-1 ring-amber-400"
+              title={usage.isPremium ? 'You are a DocFix Pro user' : 'Unlock unlimited conversions'}
+              className={`flex items-center gap-1.5 text-xs font-extrabold px-3 py-1.5 sm:py-2 rounded-xl shadow-sm transition-all cursor-pointer ${
+                usage.isPremium
+                  ? 'text-amber-900 dark:text-amber-100 bg-amber-100 dark:bg-amber-900 hover:bg-amber-200 dark:hover:bg-amber-800 ring-1 ring-amber-400'
+                  : 'text-slate-950 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 ring-1 ring-amber-400'
+              }`}
             >
-              <Crown className="w-3.5 h-3.5 fill-slate-950" />
-              <span>{usage.isPremium ? 'Premium Active' : 'Buy Premium'}</span>
+              <Crown className={`w-3.5 h-3.5 ${usage.isPremium ? 'fill-amber-500 text-amber-600' : 'fill-slate-950'}`} />
+              <span>{usage.isPremium ? 'Pro' : 'Buy Premium'}</span>
             </button>
           </div>
         </div>
