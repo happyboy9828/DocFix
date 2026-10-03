@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Cookie, X } from 'lucide-react';
+import { syncClarityConsent } from '../utils/clarity';
 
 interface CookieBannerProps {
   onOpenPrivacy: () => void;
@@ -19,11 +20,13 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ onOpenPrivacy }) => 
 
   const handleAccept = () => {
     localStorage.setItem('docfix_cookie_consent', 'accepted');
+    syncClarityConsent();
     setIsVisible(false);
   };
 
   const handleDecline = () => {
     localStorage.setItem('docfix_cookie_consent', 'essential_only');
+    syncClarityConsent();
     setIsVisible(false);
   };
 

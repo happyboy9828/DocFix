@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { Navbar, AppTab } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { CookieBanner } from './components/CookieBanner';
@@ -239,7 +239,7 @@ function AppInner() {
           <Route path="/disclaimer" element={<DisclaimerPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="*" element={() => { navigate('/', { replace: true }); return null; }} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
 
