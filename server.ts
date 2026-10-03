@@ -138,23 +138,31 @@ Sitemap: ${baseUrl}/sitemap.xml
 `);
   });
 
-  app.get('/', (req, res) => {
-    const tab = req.query.tab as string | undefined;
-    if (tab && TAB_TO_PATH[tab]) {
-      return res.redirect(301, TAB_TO_PATH[tab]);
-    }
-    if (process.env.NODE_ENV === 'production') {
-      return res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
-    }
-    res.status(200).end();
-  });
-
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.resolve(__dirname, 'dist')));
+
+    app.get('/', (req, res) => {
+      const tab = req.query.tab as string | undefined;
+      if (tab && TAB_TO_PATH[tab]) {
+        return res.redirect(301, TAB_TO_PATH[tab]);
+      }
+      return res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+    });
+
     app.get('*', (req, res) => {
       res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
     });
   } else {
+    app.use((req, res, next) => {
+      if (req.path === '/' && req.query.tab) {
+        const tab = req.query.tab as string | undefined;
+        if (tab && TAB_TO_PATH[tab]) {
+          return res.redirect(301, TAB_TO_PATH[tab]);
+        }
+      }
+      next();
+    });
+
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'spa',
